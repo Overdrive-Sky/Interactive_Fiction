@@ -17,19 +17,18 @@
     <gridmap type="boolean">false</gridmap>
     <respondtogridclicks type="boolean">false</respondtogridclicks>
     <feature_pictureframe />
-    <pov type="object">player</pov>
     <defaultbackground>SteelBlue</defaultbackground>
     <marginscolour>AliceBlue</marginscolour>
     <colourblendtop>Darkorange</colourblendtop>
     <colourblendbottom>Chocolate</colourblendbottom>
     <bordercolour>BlanchedAlmond</bordercolour>
+    <pov type="object">player</pov>
   </game>
-  <object name="room">
-    <inherit name="editor_room" />
+  <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
+    <inherit name="editor_room" />
     <isroom />
     <description>The room is very empty, with teh exception of a very shiny key and a very shiny door. They are so shiny in fact, that you can't look at them, making you question if they really exist in the firts place.</description>
-    <dropdestination type="object">room</dropdestination>
     <picture type="string"></picture>
     <attr name="grid_width" type="int">1</attr>
     <attr name="grid_length" type="int">1</attr>
@@ -37,9 +36,15 @@
     <attr name="grid_fill">SlateGray</attr>
     <attr name="grid_label_colour">Coral</attr>
     <attr name="grid_border">DarkGoldenRod</attr>
+    <dropdestination type="object">Sector_1_Garden_Overword</dropdestination>
+    <alias>Sector 1: Garden Overworld</alias>
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
     <object name="player">
       <inherit name="editor_object" />
       <inherit name="editor_player" />
+      <gender>N/A</gender>
+      <possessive>their</possessive>
+      <look>Xenoblader</look>
     </object>
     <object name="Glowing Key">
       <inherit name="editor_object" />
@@ -71,5 +76,14 @@
       <inherit name="editor_object" />
       <look>can be described as wares.</look>
     </object>
+  </object>
+  <object name="Sector_2_Habitation_Homes">
+    <inherit name="editor_room" />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>Sector 2: Habitation Homes</alias>
+  </object>
+  <object name="teste">
+    <inherit name="editor_room" />
+    <alias>Sector 3: Bio-life Laboratories</alias>
   </object>
 </asl>
