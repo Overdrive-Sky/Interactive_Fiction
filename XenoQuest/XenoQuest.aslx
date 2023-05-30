@@ -1,0 +1,75 @@
+<!--Saved by Quest 5.8.6836.13983-->
+<asl version="580">
+  <include ref="English.aslx" />
+  <include ref="Core.aslx" />
+  <game name="XenoQuest">
+    <gameid>7603f679-5336-4673-ac33-32277198613c</gameid>
+    <version>1.0</version>
+    <firstpublished>2023</firstpublished>
+    <subtitle><![CDATA[The adventures of LOLO 1 & 2]]></subtitle>
+    <author>Overdrive Sky</author>
+    <cover>XenoQuestCover.png</cover>
+    <category>Sci-Fi</category>
+    <description>In a Xeno far far way, there was a quest.</description>
+    <backgroundimage>XenoQuestCover.png</backgroundimage>
+    <setbackgroundopacity />
+    <colourblend />
+    <gridmap type="boolean">false</gridmap>
+    <respondtogridclicks type="boolean">false</respondtogridclicks>
+    <feature_pictureframe />
+    <pov type="object">player</pov>
+    <defaultbackground>SteelBlue</defaultbackground>
+    <marginscolour>AliceBlue</marginscolour>
+    <colourblendtop>Darkorange</colourblendtop>
+    <colourblendbottom>Chocolate</colourblendbottom>
+    <bordercolour>BlanchedAlmond</bordercolour>
+  </game>
+  <object name="room">
+    <inherit name="editor_room" />
+    <inherit name="gridborder_path_ns" />
+    <isroom />
+    <description>The room is very empty, with teh exception of a very shiny key and a very shiny door. They are so shiny in fact, that you can't look at them, making you question if they really exist in the firts place.</description>
+    <dropdestination type="object">room</dropdestination>
+    <picture type="string"></picture>
+    <attr name="grid_width" type="int">1</attr>
+    <attr name="grid_length" type="int">1</attr>
+    <attr name="grid_borderwidth" type="int">3</attr>
+    <attr name="grid_fill">SlateGray</attr>
+    <attr name="grid_label_colour">Coral</attr>
+    <attr name="grid_border">DarkGoldenRod</attr>
+    <object name="player">
+      <inherit name="editor_object" />
+      <inherit name="editor_player" />
+    </object>
+    <object name="Glowing Key">
+      <inherit name="editor_object" />
+      <look>Very shiny key is the most appropriate description.</look>
+      <take />
+      <linkcolour>DarkSalmon</linkcolour>
+      <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
+      <dropmsg>You felt the shininess leave you.</dropmsg>
+      <feature_usegive />
+      <use type="boolean">false</use>
+      <selfuseon type="scriptdictionary">
+        <item key="Shiny Door">
+          msg ("the key was used")
+          MoveObject (player, Abandoned Warehouse)
+          msg ("you find yourself in a warehouse")
+        </item>
+      </selfuseon>
+    </object>
+    <object name="Shiny Door">
+      <inherit name="editor_object" />
+      <alias>door</alias>
+      <look>a very shiny door. So shiny you cant actually see it.</look>
+    </object>
+  </object>
+  <object name="Abandoned Warehouse">
+    <inherit name="editor_room" />
+    <picture>XenoQuestCover.png</picture>
+    <object name="wares">
+      <inherit name="editor_object" />
+      <look>can be described as wares.</look>
+    </object>
+  </object>
+</asl>
