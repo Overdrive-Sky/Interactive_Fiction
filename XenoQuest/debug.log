@@ -1,0 +1,12 @@
+[0531/183432:ERROR:renderer_main.cc(207)] Running without renderer sandbox
+[0531/183432:ERROR:cache_util_win.cc(20)] Unable to move the cache: 5
+[0531/183432:ERROR:cache_util.cc(132)] Unable to move cache folder C:\Users\PC\AppData\Local\Temp\GPUCache to C:\Users\PC\AppData\Local\Temp\old_GPUCache_000
+[0531/183432:ERROR:cache_creator.cc(132)] Unable to create cache
+[0531/183432:ERROR:shader_disk_cache.cc(588)] Shader Cache Creation failed: -2
+[0531/185704:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
+[0531/185826:ERROR:renderer_main.cc(207)] Running without renderer sandbox
+[0531/185826:ERROR:cache_util_win.cc(20)] Unable to move the cache: 5
+[0531/185826:ERROR:cache_util.cc(132)] Unable to move cache folder C:\Users\PC\AppData\Local\Temp\GPUCache to C:\Users\PC\AppData\Local\Temp\old_GPUCache_000
+[0531/185826:ERROR:cache_creator.cc(132)] Unable to create cache
+[0531/185826:ERROR:shader_disk_cache.cc(588)] Shader Cache Creation failed: -2
+[0531/222123:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue

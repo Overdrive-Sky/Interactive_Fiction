@@ -11,9 +11,9 @@
     <cover>XenoQuestCover.png</cover>
     <category>Sci-Fi</category>
     <description>In a Xeno far far way, there was a quest.</description>
-    <backgroundimage>XenoQuestCover.png</backgroundimage>
+    <backgroundimage>space_background_rafal_gorniak.jpg</backgroundimage>
     <setbackgroundopacity />
-    <colourblend />
+    <colourblend type="boolean">false</colourblend>
     <gridmap type="boolean">false</gridmap>
     <respondtogridclicks type="boolean">false</respondtogridclicks>
     <feature_pictureframe />
@@ -22,7 +22,31 @@
     <colourblendtop>Darkorange</colourblendtop>
     <colourblendbottom>Chocolate</colourblendbottom>
     <bordercolour>BlanchedAlmond</bordercolour>
+    <showtitle />
+    <appendobjectdescription type="boolean">false</appendobjectdescription>
+    <enablehyperlinks type="boolean">false</enablehyperlinks>
+    <showpanes type="boolean">false</showpanes>
+    <showcommandbar />
+    <showlocation />
+    <classiclocation type="boolean">false</classiclocation>
+    <showborder type="boolean">false</showborder>
+    <setcustomwidth />
+    <setcustompadding />
+    <autodescription />
+    <autodisplayverbs type="boolean">false</autodisplayverbs>
+    <attr name="autodescription_description" type="int">2</attr>
+    <attr name="autodescription_youcansee" type="int">4</attr>
+    <backgroundopacity type="double">0.1</backgroundopacity>
     <pov type="object">player</pov>
+    <defaultforeground>LightCyan</defaultforeground>
+    <defaultfontsize type="int">14</defaultfontsize>
+    <defaultfont>'Trebuchet MS', Helvetica, sans-serif</defaultfont>
+    <customwidth type="int">1280</customwidth>
+    <custompaddingbottom type="int">30</custompaddingbottom>
+    <custompaddingtop type="int">30</custompaddingtop>
+    <custompaddingleft type="int">20</custompaddingleft>
+    <custompaddingright type="int">20</custompaddingright>
+    <customlocationtextcolour>GoldenRod</customlocationtextcolour>
   </game>
   <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
@@ -36,9 +60,9 @@
     <attr name="grid_fill">SlateGray</attr>
     <attr name="grid_label_colour">Coral</attr>
     <attr name="grid_border">DarkGoldenRod</attr>
-    <dropdestination type="object">Sector_1_Garden_Overword</dropdestination>
     <alias>Sector 1: Garden Overworld</alias>
     <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <dropdestination type="object">Sector_1_Garden_Overword</dropdestination>
     <object name="player">
       <inherit name="editor_object" />
       <inherit name="editor_player" />
@@ -55,6 +79,7 @@
       <dropmsg>You felt the shininess leave you.</dropmsg>
       <feature_usegive />
       <use type="boolean">false</use>
+      <scenery />
       <selfuseon type="scriptdictionary">
         <item key="Shiny Door">
           msg ("the key was used")
@@ -68,14 +93,20 @@
       <alias>door</alias>
       <look>a very shiny door. So shiny you cant actually see it.</look>
     </object>
+    <exit alias="up" to="Abandoned Warehouse">
+      <inherit name="updirection" />
+    </exit>
   </object>
   <object name="Abandoned Warehouse">
     <inherit name="editor_room" />
-    <picture>XenoQuestCover.png</picture>
+    <picture>EricLefaure2.gif</picture>
     <object name="wares">
       <inherit name="editor_object" />
       <look>can be described as wares.</look>
     </object>
+    <exit alias="down" to="Sector_1_Garden_Overword">
+      <inherit name="downdirection" />
+    </exit>
   </object>
   <object name="Sector_2_Habitation_Homes">
     <inherit name="editor_room" />
