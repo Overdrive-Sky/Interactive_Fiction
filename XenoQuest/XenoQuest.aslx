@@ -37,7 +37,6 @@
     <attr name="autodescription_description" type="int">2</attr>
     <attr name="autodescription_youcansee" type="int">4</attr>
     <backgroundopacity type="double">0.1</backgroundopacity>
-    <pov type="object">player</pov>
     <defaultforeground>LightCyan</defaultforeground>
     <defaultfontsize type="int">14</defaultfontsize>
     <defaultfont>'Trebuchet MS', Helvetica, sans-serif</defaultfont>
@@ -47,6 +46,7 @@
     <custompaddingleft type="int">20</custompaddingleft>
     <custompaddingright type="int">20</custompaddingright>
     <customlocationtextcolour>GoldenRod</customlocationtextcolour>
+    <pov type="object">player</pov>
   </game>
   <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
@@ -96,6 +96,14 @@
     <exit alias="up" to="Abandoned Warehouse">
       <inherit name="updirection" />
     </exit>
+    <object name="ai_character">
+      <inherit name="editor_object" />
+      <alias>Timmy</alias>
+      <gender>N/A</gender>
+      <article>N/A</article>
+      <possessive>N/A</possessive>
+      <look>The AI that commands Planet Cosmos</look>
+    </object>
   </object>
   <object name="Abandoned Warehouse">
     <inherit name="editor_room" />
@@ -113,8 +121,24 @@
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 2: Habitation Homes</alias>
   </object>
-  <object name="teste">
+  <object name="Sector_3_Bio_life_Laboratories">
     <inherit name="editor_room" />
-    <alias>Sector 3: Bio-life Laboratories</alias>
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>Sector 3: Bio-life Laboratories (Meaning of “Life” or survival) </alias>
+  </object>
+  <object name="Sector_4_Heat_Cooler_Blocks">
+    <inherit name="editor_room" />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>Sector 4: Heat-Cooler Blocks</alias>
+  </object>
+  <object name="Sector_5_Engine_Works">
+    <inherit name="editor_room" />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>Sector 5: Engine Works </alias>
+  </object>
+  <object name="Sector_6_Administrative_Wing">
+    <inherit name="editor_room" />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>Sector 6: Administrative Wing</alias>
   </object>
 </asl>
