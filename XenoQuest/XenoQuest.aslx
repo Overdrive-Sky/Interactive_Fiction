@@ -68,7 +68,13 @@
       <inherit name="editor_player" />
       <gender>N/A</gender>
       <possessive>their</possessive>
-      <look>Xenoblader</look>
+      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
+      <alias>Wanda</alias>
+      <take />
+      <feature_usegive />
+      <use type="boolean">false</use>
+      <attr name="pov_look">Looking good.</attr>
+      <isroom type="boolean">false</isroom>
     </object>
     <object name="Glowing Key">
       <inherit name="editor_object" />
@@ -120,25 +126,99 @@
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 2: Habitation Homes</alias>
+    <description><![CDATA[Empty and abandoned housing facilities, the previous artificial wildlife had taken over, absolute silence except for low mechanic humming.  <br/>The homes comes in varies sizes, to rare apartments to common small homes. <br/>Many ventilations systems across the area, from the ceiling to the floors, cause low machine noises to flood the area. <br/>There is much evidence of old communities that were consumed by flora, such as buildings with signs (theater, cinema), playgrounds, fountains, parks. ]]></description>
+    <exit alias="east" to="Sector_3_Bio_life_Laboratories">
+      <inherit name="eastdirection" />
+    </exit>
+    <object name="interesting_house">
+      <inherit name="editor_room" />
+      <object name="Glowing_Key">
+        <inherit name="editor_object" />
+      </object>
+      <exit alias="out" to="Sector_2_Habitation_Homes">
+        <inherit name="outdirection" />
+      </exit>
+    </object>
+    <exit alias="in" to="interesting_house">
+      <inherit name="indirection" />
+    </exit>
+    <object name="doll">
+      <inherit name="editor_object" />
+    </object>
+    <object name="poster">
+      <inherit name="editor_object" />
+    </object>
+    <object name="family_photo">
+      <inherit name="editor_object" />
+    </object>
   </object>
   <object name="Sector_3_Bio_life_Laboratories">
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 3: Bio-life Laboratories (Meaning of “Life” or survival) </alias>
+    <description><![CDATA[Laboratories where organic matter was replicated artificially, many tubes filled with multitudes of lifeforms eerily glow on the space.  <br/>The eternal artificial lights that shine on the labs, they flicker ever so slightly but the glow from the tubes are much stronger. The tubes have unidentifiable globs of matter; however, some have a few noticeable and frightening recognizable features.  The A.I. will ask questions on why humanity keeps finding ways to survive. ]]></description>
+    <exit alias="west" to="Sector_2_Habitation_Homes">
+      <inherit name="westdirection" />
+    </exit>
+    <exit alias="east" to="Sector_4_Heat_Cooler_Blocks">
+      <inherit name="eastdirection" />
+    </exit>
+    <object name="tubes">
+      <inherit name="editor_object" />
+    </object>
+    <object name="artificial_lights">
+      <inherit name="editor_object" />
+    </object>
+    <object name="broken_tube">
+      <inherit name="editor_object" />
+    </object>
   </object>
   <object name="Sector_4_Heat_Cooler_Blocks">
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 4: Heat-Cooler Blocks</alias>
+    <exit alias="west" to="Sector_3_Bio_life_Laboratories">
+      <inherit name="westdirection" />
+    </exit>
+    <exit alias="east" to="Sector_5_Engine_Works">
+      <inherit name="eastdirection" />
+    </exit>
+    <object name="cooling_system">
+      <inherit name="editor_object" />
+    </object>
+    <object name="computer">
+      <inherit name="editor_object" />
+    </object>
+    <object name="warm_area">
+      <inherit name="editor_room" />
+      <object name="passkey_sector_5">
+        <inherit name="editor_object" />
+      </object>
+      <exit alias="out" to="Sector_4_Heat_Cooler_Blocks">
+        <inherit name="outdirection" />
+      </exit>
+    </object>
+    <exit alias="in" to="warm_area">
+      <inherit name="indirection" />
+    </exit>
   </object>
   <object name="Sector_5_Engine_Works">
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 5: Engine Works </alias>
+    <exit alias="east" to="Sector_6_Administrative_Wing">
+      <inherit name="eastdirection" />
+    </exit>
+    <exit alias="west" to="Sector_4_Heat_Cooler_Blocks">
+      <inherit name="westdirection" />
+    </exit>
   </object>
   <object name="Sector_6_Administrative_Wing">
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 6: Administrative Wing</alias>
+    <exit alias="west" to="Sector_5_Engine_Works">
+      <inherit name="westdirection" />
+    </exit>
   </object>
 </asl>
