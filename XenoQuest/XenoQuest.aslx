@@ -206,19 +206,45 @@
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 5: Engine Works </alias>
+    <description><![CDATA[The Cosmos’s mechanical engine, in which many pieces and paths move around. There's a terminal to monitor the engine and the sector's functions.<br/>Additionately, there's a warehouse that stores extra mechanical pieces for exclusive repais in this sector.]]></description>
     <exit alias="east" to="Sector_6_Administrative_Wing">
       <inherit name="eastdirection" />
     </exit>
     <exit alias="west" to="Sector_4_Heat_Cooler_Blocks">
       <inherit name="westdirection" />
     </exit>
+    <object name="engine">
+      <inherit name="editor_object" />
+    </object>
+    <object name="terminal">
+      <inherit name="editor_object" />
+      <object name="passkey_sector6">
+        <inherit name="editor_object" />
+      </object>
+    </object>
+    <object name="engine_warehouse">
+      <inherit name="editor_room" />
+      <object name="activation_code">
+        <inherit name="editor_object" />
+      </object>
+      <exit alias="out" to="Sector_5_Engine_Works">
+        <inherit name="outdirection" />
+      </exit>
+    </object>
+    <exit alias="in" to="engine_warehouse">
+      <inherit name="indirection" />
+    </exit>
   </object>
   <object name="Sector_6_Administrative_Wing">
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 6: Administrative Wing</alias>
+    <description>The Cosmos’s main control interface. The place where Cosmo's is stored and monitors every aspect of the planet.</description>
     <exit alias="west" to="Sector_5_Engine_Works">
       <inherit name="westdirection" />
     </exit>
+    <object name="control_interface">
+      <inherit name="editor_object" />
+    </object>
   </object>
 </asl>
