@@ -25,7 +25,7 @@
     <showtitle />
     <appendobjectdescription type="boolean">false</appendobjectdescription>
     <enablehyperlinks />
-    <showpanes />
+    <showpanes type="boolean">false</showpanes>
     <showcommandbar />
     <showlocation />
     <classiclocation type="boolean">false</classiclocation>
@@ -52,6 +52,8 @@
     <turnoffplacesandobjects />
     <statusandcompassattop />
     <panestheme>Midnight</panestheme>
+    <customlocationcolour>None</customlocationcolour>
+    <turnoffsavebutton />
     <pov type="object">player</pov>
     <start type="script">
       JS.setCss ("#gamePanel", "background:transparent")
@@ -60,8 +62,6 @@
     </start>
     <roomenter type="script">
     </roomenter>
-    <customlocationcolour>None</customlocationcolour>
-    <turnoffsavebutton />
   </game>
   <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
@@ -126,14 +126,14 @@
       <attr name="feature_container" type="boolean">false</attr>
       <isopen type="boolean">false</isopen>
       <feature_startscript />
+      <open />
+      <close type="boolean">false</close>
       <openscript type="script">
         MakeExitVisible
         MoveObject (player, Sector_2_Habitation_Homes)
       </openscript>
       <attr name="_initialise_" type="script">
       </attr>
-      <open />
-      <close type="boolean">false</close>
     </object>
     <object name="ai_character">
       <inherit name="editor_object" />
