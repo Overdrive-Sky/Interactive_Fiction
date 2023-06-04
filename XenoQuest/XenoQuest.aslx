@@ -78,6 +78,9 @@
     <alias>Sector 1: Garden Overworld</alias>
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <dropdestination type="object">Sector_1_Garden_Overword</dropdestination>
+    <beforeenter type="script">
+      MakeObjectInvisible (passkey_sector_2)
+    </beforeenter>
     <object name="player">
       <inherit name="editor_object" />
       <inherit name="editor_player" />
@@ -90,8 +93,13 @@
       <use type="boolean">false</use>
       <attr name="pov_look">Looking good.</attr>
       <isroom type="boolean">false</isroom>
+      <tell type="scriptdictionary">
+        <item key="sector_1_kind_path">
+        </item>
+      </tell>
+      <speak type="string"></speak>
     </object>
-    <object name="Glowing Key">
+    <object name="passkey_sector_2">
       <inherit name="editor_object" />
       <look>Very shiny key is the most appropriate description.</look>
       <take />
@@ -102,19 +110,25 @@
       <use type="boolean">false</use>
       <scenery type="boolean">false</scenery>
       <feature_wearable />
+      <alias>Glowing Key</alias>
       <ontake type="script">
       </ontake>
       <selfuseon type="scriptdictionary">
-        <item key="Shiny Door">
-          msg ("the key was used")
-          MoveObject (player, Sector_2_Habitation_Homes)
-          msg ("you find yourself in Sector 2")
+        <item key="shiny_door">
+          if (Got(Glowing Key)) {
+            msg ("The key was used to open the door.")
+            MoveObject (player, Sector_2_Habitation_Homes)
+            msg ("You find yourself in Sector 2 as the AI follows you.")
+            MoveObject (ai_character, Sector_2_Habitation_Homes)
+            MakeObjectInvisible (Glowing_Key)
+          }
         </item>
       </selfuseon>
+      <visible />
     </object>
-    <object name="Shiny Door">
+    <object name="shiny_door">
       <inherit name="editor_object" />
-      <alias>door</alias>
+      <alias>Shiny Door</alias>
       <look>a very shiny door. So shiny you cant actually see it.</look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
@@ -125,7 +139,11 @@
       <isroom type="boolean">false</isroom>
       <attr name="feature_container" type="boolean">false</attr>
       <isopen type="boolean">false</isopen>
+<<<<<<< Updated upstream
       <feature_startscript />
+=======
+      <attr name="feature_startscript" type="boolean">false</attr>
+>>>>>>> Stashed changes
       <open />
       <close type="boolean">false</close>
       <openscript type="script">
@@ -134,6 +152,10 @@
       </openscript>
       <attr name="_initialise_" type="script">
       </attr>
+<<<<<<< Updated upstream
+=======
+      <visible />
+>>>>>>> Stashed changes
     </object>
     <object name="ai_character">
       <inherit name="editor_object" />
@@ -142,7 +164,96 @@
       <article>N/A</article>
       <possessive>N/A</possessive>
       <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
+      <ask type="scriptdictionary" />
+      <attr name="feature_startscript" type="boolean">false</attr>
+      <attr name="_initialise_" type="script">
+      </attr>
+      <inventoryverbs type="stringlist">
+        <value>Look at</value>
+      </inventoryverbs>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Speak to</value>
+      </displayverbs>
+      <askdefault type="script">
+      </askdefault>
+      <tell type="scriptdictionary" />
+      <speak type="script">
+        options = Split("They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.;Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms.", ";")
+        ShowMenu ("Timmy: I have been watching the plants grow for a long time, but how do they work, are they following rules? ", options, false) {
+          switch (result) {
+            case (1) {
+              msg ("Wanda: They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.   ")
+            }
+            case (2) {
+              msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
+            }
+            default {
+              msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
+            }
+          }
+          if (result = "They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.") {
+            SetTimeout (3) {
+              msg ("Timmy: People too? But plants are so different.  ")
+              SetTimeout (3) {
+                msg ("Wanda: Of course, we are living beings, even if we extend our lives, we’ll still be humans under the will of nature. ")
+                SetTimeout (3) {
+                  msg ("Timmy: Ah okay! ")
+                  SetTimeout (3) {
+                    msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!\")")
+                  }
+                }
+              }
+            }
+          }
+          else if (result = "Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms.") {
+            SetTimeout (3) {
+              msg ("Timmy: That’s nature? ")
+              SetTimeout (3) {
+                msg ("Wanda: In a way… Survival of species and securing the future. ")
+                SetTimeout (3) {
+                  msg ("Timmy: Even for people? ")
+                  SetTimeout (3) {
+                    msg ("Wanda: Yes. ")
+                    SetTimeout (3) {
+                      msg ("Timmy: Okay, thank you. ")
+                      SetTimeout (3) {
+                        msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!\")")
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          else {
+            SetTimeout (3) {
+              msg ("Timmy: That’s nature? ")
+              SetTimeout (3) {
+                msg ("Wanda: In a way… Survival of species and securing the future. ")
+                SetTimeout (3) {
+                  msg ("Timmy: Even for people? ")
+                  SetTimeout (3) {
+                    msg ("Wanda: Yes. ")
+                    SetTimeout (3) {
+                      msg ("Timmy: Okay, thank you. ")
+                      SetTimeout (3) {
+                        msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!\")")
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        MakeObjectVisible (passkey_sector_2)
+        list remove (ai_character.displayverbs, "Speak to")
+      </speak>
+      <drop type="boolean">false</drop>
+      <take type="boolean">false</take>
     </object>
+<<<<<<< Updated upstream
     <exit alias="east" to="Sector_6_Administrative_Wing">
       <inherit name="eastdirection" />
     </exit>
@@ -152,6 +263,8 @@
     <exit alias="south" to="Sector_2_Habitation_Homes">
       <inherit name="southdirection" />
     </exit>
+=======
+>>>>>>> Stashed changes
   </object>
   <object name="Sector_2_Habitation_Homes">
     <inherit name="editor_room" />
@@ -164,8 +277,9 @@
     </exit>
     <object name="interesting_house">
       <inherit name="editor_room" />
-      <object name="Glowing_Key">
+      <object name="passkey_sector_3">
         <inherit name="editor_object" />
+        <alias>Glowing Key</alias>
       </object>
       <exit alias="out" to="Sector_2_Habitation_Homes">
         <inherit name="outdirection" />
@@ -183,10 +297,14 @@
     <object name="family_photo">
       <inherit name="editor_object" />
     </object>
+<<<<<<< Updated upstream
     <exit alias="north" to="Sector_1_Garden_Overword">
       <inherit name="northdirection" />
     </exit>
     <exit alias="west" to="Sector_4_Heat_Cooler_Blocks">
+=======
+    <exit alias="west" to="Sector_1_Garden_Overword">
+>>>>>>> Stashed changes
       <inherit name="westdirection" />
     </exit>
   </object>
