@@ -1,0 +1,70 @@
+version: "3.1"
+
+stories:
+
+- story: startled_first
+  steps:
+    - intent: scared
+    - slot_was_set:
+      - previously_scared: false
+    - action: set_already_scared
+    - action: set_already_surprised
+    - action: utter_scared
+
+- story: startled_second
+  steps:
+    - intent: scared
+    - slot_was_set:
+      - previously_scared: true
+    - action: utter_scared_following
+
+- story: surprised_first
+  steps:
+    - intent: surprised
+    - slot_was_set:
+      - previously_surprised: false
+    - action: set_already_scared
+    - action: set_already_surprised
+    - action: utter_surprised
+
+- story: surprised_second
+  steps:
+    - intent: surprised
+    - slot_was_set:
+      - previously_surprised: true
+    - action: utter_surprised_following
+
+
+# - story: presenting
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+  
+
+
+# - story: happy path
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_great
+#   - action: utter_happy
+
+# - story: sad path 1
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: affirm
+#   - action: utter_happy
+
+# - story: sad path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: deny
+#   - action: utter_goodbye

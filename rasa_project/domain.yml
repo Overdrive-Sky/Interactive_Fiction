@@ -1,0 +1,86 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - no_input
+  - scared
+  - surprised
+
+responses:
+
+  utter_scared:
+  - text: "No need to be scared! I'm just Timmy, friendly AI to help everyone!"
+  - text: "Oh, sorry... Timmy don't want that. Timmy just wants to help"
+  - text: "Scared? Why? I'm Timmy the friendly AI that helps everybody"
+
+  utter_scared_following:
+  - text: "I already told you! Don't be scared! I'm just Timmy, friendly AI to help everyone!"
+  - text: "Again? Sorry. Timmy don't want that. Timmy just wants to help"
+  - text: "Again? Why? I'm Timmy the friendly AI that helps everybody"
+
+  utter_surprised:
+  - text: "Did I surprise you? Uau, Timmy is good at surprising!"
+  - text: "Timmy also surprises himself sometimes"
+  - text: "Surprised? Why? How? It is just Timmy, the friendly AI"
+
+  utter_surprised_following:
+  - text: "Again? Did I surprise you? Timmy is good at surprising!"
+  - text: "But Timmy is right here! No need to be surprised again"
+  - text: "Getting surprised again? How? Timmy is here since the beggining"
+
+  utter_greet:
+  - text: "Hey there maintence person! How are you?"
+
+  utter_cheer_up:
+  - text: "Would you like some virtual chocolate to cheer you up?"
+
+  utter_did_that_help:
+  - text: "Did Timmy help?"
+
+  utter_happy:
+  - text: "Urray!"
+
+  utter_goodbye:
+  - text: "Do you really have to go?"
+  - text: "See you soon maintenance guy"
+
+  utter_iamabot:
+  - text: "I am just Timmy! Your fairly odd AI assistant"
+
+  utter_default:
+    - text: I'm sorry, Timmy didn't understand that. Could you rephrase it?
+    - text: "Ugh... what?"
+    - text: "Timmy is confused..."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+entities:
+  - name 
+
+slots:
+  previously_scared:
+    type: bool
+    influence_conversation: true
+    initial_value: False
+    mappings:
+      - type: custom
+  previously_surprised:
+    type: bool
+    influence_conversation: true
+    initial_value: False
+    mappings:
+      - type: custom
+
+
+actions:
+  - set_already_scared
+  - set_already_surprised
+#   - action_session_start
