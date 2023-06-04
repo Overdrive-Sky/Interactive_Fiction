@@ -10,3 +10,6 @@
 [0531/185826:ERROR:cache_creator.cc(132)] Unable to create cache
 [0531/185826:ERROR:shader_disk_cache.cc(588)] Shader Cache Creation failed: -2
 [0531/222123:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
+[0604/222947:ERROR:renderer_main.cc(207)] Running without renderer sandbox
+[0604/223223:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
+[0604/223234:ERROR:renderer_main.cc(207)] Running without renderer sandbox
