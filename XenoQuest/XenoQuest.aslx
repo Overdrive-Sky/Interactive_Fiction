@@ -24,8 +24,8 @@
     <bordercolour>BlanchedAlmond</bordercolour>
     <showtitle />
     <appendobjectdescription type="boolean">false</appendobjectdescription>
-    <enablehyperlinks type="boolean">false</enablehyperlinks>
-    <showpanes type="boolean">false</showpanes>
+    <enablehyperlinks />
+    <showpanes />
     <showcommandbar />
     <showlocation />
     <classiclocation type="boolean">false</classiclocation>
@@ -46,6 +46,12 @@
     <custompaddingleft type="int">20</custompaddingleft>
     <custompaddingright type="int">20</custompaddingright>
     <customlocationtextcolour>GoldenRod</customlocationtextcolour>
+    <feature_asktell />
+    <defaultlinkforeground>Crimson</defaultlinkforeground>
+    <turnoffcompass />
+    <turnoffplacesandobjects />
+    <statusandcompassattop />
+    <panestheme>Midnight</panestheme>
     <pov type="object">player</pov>
   </game>
   <object name="Sector_1_Garden_Overword">
@@ -85,12 +91,15 @@
       <dropmsg>You felt the shininess leave you.</dropmsg>
       <feature_usegive />
       <use type="boolean">false</use>
-      <scenery />
+      <scenery type="boolean">false</scenery>
+      <feature_wearable />
+      <ontake type="script">
+      </ontake>
       <selfuseon type="scriptdictionary">
         <item key="Shiny Door">
           msg ("the key was used")
-          MoveObject (player, Abandoned Warehouse)
-          msg ("you find yourself in a warehouse")
+          MoveObject (player, Sector_2_Habitation_Homes)
+          msg ("you find yourself in Sector 2")
         </item>
       </selfuseon>
     </object>
@@ -98,6 +107,24 @@
       <inherit name="editor_object" />
       <alias>door</alias>
       <look>a very shiny door. So shiny you cant actually see it.</look>
+      <drop type="boolean">false</drop>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Open</value>
+      </displayverbs>
+      <inventoryverbs type="stringlist" />
+      <isroom type="boolean">false</isroom>
+      <attr name="feature_container" type="boolean">false</attr>
+      <isopen type="boolean">false</isopen>
+      <feature_startscript />
+      <openscript type="script">
+        MakeExitVisible
+        MoveObject (player, Sector_2_Habitation_Homes)
+      </openscript>
+      <attr name="_initialise_" type="script">
+      </attr>
+      <open />
+      <close type="boolean">false</close>
     </object>
     <exit alias="up" to="Abandoned Warehouse">
       <inherit name="updirection" />
@@ -108,7 +135,7 @@
       <gender>N/A</gender>
       <article>N/A</article>
       <possessive>N/A</possessive>
-      <look>The AI that commands Planet Cosmos</look>
+      <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
     </object>
   </object>
   <object name="Abandoned Warehouse">
