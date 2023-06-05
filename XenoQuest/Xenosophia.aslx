@@ -67,6 +67,9 @@
       wait {
         ClearScreen
         JS.setCss ("#status", "display:block")
+        SetTimeout (2) {
+          msg ("Timmy: Hello")
+        }
       }
       JS.setCss ("#endWaitLink", "color:rgb(224, 255, 255)")
     ]]></start>
@@ -164,17 +167,17 @@
       <askdefault type="script">
       </askdefault>
       <speak type="script">
-        options = Split("They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.;Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms.", ";")
+        options = Split("Be Kind;Be Direct", ";")
         ShowMenu ("Timmy: I have been watching the plants grow for a long time, but how do they work, are they following rules? ", options, false) {
           switch (result) {
             case (1) {
-              msg ("Wanda: They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.")
+              msg ("Be Kind")
             }
             case (2) {
-              msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
+              msg ("Be Direct")
             }
           }
-          if (result = "They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.") {
+          if (result = "Be Kind") {
             msg ("Wanda: They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.")
             SetTimeout (3) {
               msg ("Timmy: People too? But plants are so different.  ")
@@ -189,7 +192,7 @@
               }
             }
           }
-          else if (result = "Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms.") {
+          else if (result = "Be Direct") {
             msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
             SetTimeout (3) {
               msg ("Timmy: That’s nature? ")
@@ -400,17 +403,17 @@
       <askdefault type="script">
       </askdefault>
       <speak type="script">
-        options = Split("You mean spent time together?; Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.", ";")
+        options = Split("Be Kind; Be Direct", ";")
         ShowMenu ("Timmy: People used to talk, play, spend time with each other in this sector. Why do they do that? ", options, false) {
           switch (result) {
             case (1) {
-              msg ("Wanda: You mean spent time together?")
+              msg ("Be kind")
             }
             case (2) {
-              msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
+              msg ("Be direct")
             }
           }
-          if (result = "You mean spent time together?") {
+          if (result = "Be kind") {
             msg ("Wanda: You mean spent time together?")
             SetTimeout (3) {
               msg ("Timmy: Mm!")
@@ -435,7 +438,7 @@
               }
             }
           }
-          else if (result = "Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.") {
+          else if (result = "Be Direct") {
             msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
             SetTimeout (3) {
               msg ("Timmy: So, it’s by force?")
@@ -530,7 +533,161 @@
     </object>
     <object name="broken_tube">
       <inherit name="editor_object" />
-      <alias>Broken Tube</alias>
+      <inherit name="container_open" />
+      <feature_container />
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Open</value>
+      </displayverbs>
+      <hidechildren />
+      <listchildren />
+      <close type="boolean">false</close>
+      <look><![CDATA[Amidst all the tubes, this one is broken.<br/>Oh! There's a {object:pendrive} and a{object:passkey_sector_4} inside it!]]></look>
+      <listchildrenprefix>It contains</listchildrenprefix>
+      <object name="admin_card">
+        <inherit name="editor_object" />
+        <displayverbs type="stringlist">
+          <value>Look at</value>
+          <value>Take</value>
+          <value>Use</value>
+        </displayverbs>
+        <feature_usegive />
+        <selfuseon type="scriptdictionary">
+          <item key="computer">
+          </item>
+        </selfuseon>
+        <look>A simple admin card</look>
+        <alias>Card</alias>
+      </object>
+      <object name="passkey_sector_4">
+        <inherit name="editor_object" />
+        <look>Very shiny key is the most appropriate description.</look>
+        <take />
+        <linkcolour>Crimson</linkcolour>
+        <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
+        <dropmsg>You felt the shininess leave you.</dropmsg>
+        <feature_usegive />
+        <use type="boolean">false</use>
+        <scenery />
+        <feature_wearable />
+        <alias>Glowing Key</alias>
+        <visible />
+        <usemenuprompt>Shiny Door</usemenuprompt>
+        <feature_switchable />
+        <ontake type="script">
+        </ontake>
+        <selfuseon type="scriptdictionary">
+          <item key="old_door">
+            if (game.pov.parent = Sector_2_Habitation_Homes) {
+              if (Got(passkey_sector_3)) {
+                msg ("The key was used to open the old door.")
+                MoveObject (player, Sector_3_Bio_life_Laboratories)
+                msg ("You find yourself in Sector 3 as Timmy continues to follow you.")
+                MakeObjectInvisible (passkey_sector_3)
+              }
+            }
+          </item>
+        </selfuseon>
+      </object>
+    </object>
+    <object name="ai_character_in_sector_3">
+      <inherit name="editor_object" />
+      <alias>Timmy</alias>
+      <gender>N/A</gender>
+      <article>N/A</article>
+      <possessive>N/A</possessive>
+      <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
+      <attr name="feature_startscript" type="boolean">false</attr>
+      <inventoryverbs type="stringlist">
+        <value>Look at</value>
+      </inventoryverbs>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Speak to</value>
+      </displayverbs>
+      <drop type="boolean">false</drop>
+      <take type="boolean">false</take>
+      <attr name="_initialise_" type="script">
+      </attr>
+      <askdefault type="script">
+      </askdefault>
+      <speak type="script">
+        options = Split("Be Kind;Be Direct", ";")
+        ShowMenu ("Timmy: People keeps finding ways to survive and it seems by any means… Is Life that meaningful?", options, false) {
+          switch (result) {
+            case (1) {
+              msg ("Be Kind")
+            }
+            case (2) {
+              msg ("Be Direct")
+            }
+          }
+          if (result = "Be Kind") {
+            msg ("Wanda: That is a heavy question… We don’t know what lies beyond so we try to extend as much as we can, make the most of it… until the time comes.")
+            SetTimeout (3) {
+              msg ("Timmy: Is that the “meaning”?")
+              SetTimeout (3) {
+                msg ("Wanda: Everyone can have their own “meaning”, maybe finding it for themselves is the meaning itself.")
+                SetTimeout (3) {
+                  msg ("Timmy: Interesting…")
+                  SetTimeout (3) {
+                    msg ("Timmy: Hey! Have you checked that {object:broken_tube}?")
+                  }
+                }
+              }
+            }
+          }
+          else if (result = "Be Direct") {
+            msg ("Wanda: It is fear, the absolute fear of oblivion. People cling to that primordial fear despite its inevitability. So, we push towards our species’ survival, to the point of trying to recreate nature.")
+            SetTimeout (3) {
+              msg ("Timmy: Why?")
+              SetTimeout (3) {
+                msg ("Wanda: So, we won’t be forgotten in time, so we can leave an impact.")
+                SetTimeout (3) {
+                  msg ("Timmy: That is “Life”? ")
+                  SetTimeout (3) {
+                    msg ("Wanda: Maybe. There never was a single answer.")
+                    SetTimeout (3) {
+                      msg ("Timmy: Hmm.")
+                      SetTimeout (3) {
+                        msg ("Timmy: Hey! Have you checked that {object:broken_tube}?")
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          else {
+            msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
+            SetTimeout (3) {
+              msg ("Timmy: So, it’s by force?")
+              SetTimeout (3) {
+                msg ("Wanda: Not exactly, acting alone is possible, however it can cause many problems both mentally and physically.")
+                SetTimeout (3) {
+                  msg ("Timmy: It’s the better choice and thing to do?")
+                  SetTimeout (3) {
+                    msg ("Wanda: Yes, the connection between people are in most times, beneficial to both parties. ")
+                    SetTimeout (3) {
+                      msg ("Timmy: Hmm I want to feel that! Let's search that {object:interesting_house} together!")
+                      msg ("Let's go {exit:Broken Door}.")
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        list remove (ai_character_in_sector_2.displayverbs, "Speak to")
+        MakeExitVisible (Broken Door)
+        MakeObjectVisible (interesting_house)
+      </speak>
+      <ask type="scriptdictionary" />
+      <tell type="scriptdictionary" />
+    </object>
+    <object name="Sector_4_Door">
+      <inherit name="editor_object" />
+      <alias>Sector  4 Door</alias>
     </object>
   </object>
   <object name="Sector_4_Heat_Cooler_Blocks">
