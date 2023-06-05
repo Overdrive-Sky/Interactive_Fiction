@@ -2,15 +2,15 @@
 <asl version="580">
   <include ref="English.aslx" />
   <include ref="Core.aslx" />
-  <game name="XenoQuest">
+  <game name="Xenosophia">
     <gameid>7603f679-5336-4673-ac33-32277198613c</gameid>
     <version>1.0</version>
     <firstpublished>2023</firstpublished>
-    <subtitle><![CDATA[The adventures of LOLO 1 & 2]]></subtitle>
+    <subtitle type="string"></subtitle>
     <author>Overdrive Sky</author>
-    <cover>XenoQuestCover.png</cover>
+    <cover>cover_art.png</cover>
     <category>Sci-Fi</category>
-    <description>In a Xeno far far way, there was a quest.</description>
+    <description>Stranded on an inconspicuous planet, you find yourself in the middle of a web of forgotten history. With the help of a friendly AI, one might just lay bare the fundamental essence of human nature.</description>
     <backgroundimage>space_background_rafal_gorniak.jpg</backgroundimage>
     <setbackgroundopacity />
     <colourblend type="boolean">false</colourblend>
@@ -58,11 +58,18 @@
     <commandpane type="boolean">false</commandpane>
     <attr name="command_newline" type="boolean">false</attr>
     <pov type="object">player</pov>
-    <start type="script">
+    <start type="script"><![CDATA[
       JS.setCss ("#gamePanel", "background:transparent")
-      JS.setCss ("#status", "background:rgb(6, 14, 25)")
       JS.setCss ("#gamePanel", "top:28px")
-    </start>
+      JS.setCss ("#status", "background:rgb(6, 14, 25)")
+      JS.setCss ("#status", "display:none")
+      msg ("No one really knows when the aberrations started to happen, or when the term came into fruition, but several have tried to get to bottom of it. No one has come forth with a reasonable explanation or course of action so far.<br/><br/>Since light-speed space travel is a fairly democratized affair, there really are no drawbacks to setting sale to nearby planetary systems and sight-seeing to one’s heart's content. Many have wandered aimlessly in hopes of finding some kind of truth that would recontextualize everything, while others built super-computers in order to retrieve anything and everything that could be useful from the surrounding data. <br/><br/>You are a simple maintenance worker for several of these super-computers, but for a while now, you have been having strange visions of a small celestial body in a neighbouring planetary system. Recklessly setting your makeshift craft’s trajectory to that of the supposed heavenly object, you end up crash landing on the small planet, and while you came out unscathed, the same could not be said for your trip companion. Stranded, but curious, you decide to delve further into the unknown.")
+      wait {
+        ClearScreen
+        JS.setCss ("#status", "display:block")
+      }
+      JS.setCss ("#endWaitLink", "color:rgb(224, 255, 255)")
+    ]]></start>
     <roomenter type="script">
     </roomenter>
   </game>
@@ -161,16 +168,14 @@
         ShowMenu ("Timmy: I have been watching the plants grow for a long time, but how do they work, are they following rules? ", options, false) {
           switch (result) {
             case (1) {
-              msg ("Wanda: They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.   ")
+              msg ("Wanda: They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.")
             }
             case (2) {
               msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
             }
-            default {
-              msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
-            }
           }
           if (result = "They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.") {
+            msg ("Wanda: They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.")
             SetTimeout (3) {
               msg ("Timmy: People too? But plants are so different.  ")
               SetTimeout (3) {
@@ -178,13 +183,14 @@
                 SetTimeout (3) {
                   msg ("Timmy: Ah okay! ")
                   SetTimeout (3) {
-                    msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!\")")
+                    msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!")
                   }
                 }
               }
             }
           }
           else if (result = "Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms.") {
+            msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
             SetTimeout (3) {
               msg ("Timmy: That’s nature? ")
               SetTimeout (3) {
@@ -196,7 +202,7 @@
                     SetTimeout (3) {
                       msg ("Timmy: Okay, thank you. ")
                       SetTimeout (3) {
-                        msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!\")")
+                        msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!")
                       }
                     }
                   }
@@ -205,6 +211,7 @@
             }
           }
           else {
+            msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
             SetTimeout (3) {
               msg ("Timmy: That’s nature? ")
               SetTimeout (3) {
@@ -230,6 +237,24 @@
       </speak>
       <ask type="scriptdictionary" />
       <tell type="scriptdictionary" />
+    </object>
+    <object name="player">
+      <inherit name="editor_object" />
+      <inherit name="editor_player" />
+      <gender>N/A</gender>
+      <possessive>their</possessive>
+      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
+      <alias>Wanda</alias>
+      <take />
+      <feature_usegive />
+      <use type="boolean">false</use>
+      <attr name="pov_look">Looking good.</attr>
+      <isroom type="boolean">false</isroom>
+      <speak type="string"></speak>
+      <tell type="scriptdictionary">
+        <item key="sector_1_kind_path">
+        </item>
+      </tell>
     </object>
   </object>
   <object name="Sector_2_Habitation_Homes">
@@ -384,11 +409,9 @@
             case (2) {
               msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
             }
-            default {
-              msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
-            }
           }
           if (result = "You mean spent time together?") {
+            msg ("Wanda: You mean spent time together?")
             SetTimeout (3) {
               msg ("Timmy: Mm!")
               SetTimeout (3) {
@@ -401,10 +424,10 @@
                       msg ("Timmy: So together we can achieve more?")
                       SetTimeout (3) {
                         msg ("Wanda: Exactly.")
-                      }
-                      SetTimeout (3) {
-                        msg ("Timmy: Hmm, then let's search that {object:interesting_house} together! We might find some amazing things!")
-                        msg ("Let's go {exit:Broken Door}.")
+                        SetTimeout (3) {
+                          msg ("Timmy: Hmm, then let's search that {object:interesting_house} together! We might find some amazing things!")
+                          msg ("Let's go {exit:Broken Door}.")
+                        }
                       }
                     }
                   }
@@ -413,6 +436,7 @@
             }
           }
           else if (result = "Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.") {
+            msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
             SetTimeout (3) {
               msg ("Timmy: So, it’s by force?")
               SetTimeout (3) {
@@ -431,6 +455,7 @@
             }
           }
           else {
+            msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
             SetTimeout (3) {
               msg ("Timmy: So, it’s by force?")
               SetTimeout (3) {
@@ -481,24 +506,6 @@
       <attr name="_initialise_" type="script">
       </attr>
     </object>
-    <object name="player">
-      <inherit name="editor_object" />
-      <inherit name="editor_player" />
-      <gender>N/A</gender>
-      <possessive>their</possessive>
-      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
-      <alias>Wanda</alias>
-      <take />
-      <feature_usegive />
-      <use type="boolean">false</use>
-      <attr name="pov_look">Looking good.</attr>
-      <isroom type="boolean">false</isroom>
-      <speak type="string"></speak>
-      <tell type="scriptdictionary">
-        <item key="sector_1_kind_path">
-        </item>
-      </tell>
-    </object>
     <exit name="Broken Door" alias="in" to="interesting_house">
       <inherit name="indirection" />
       <locked type="boolean">false</locked>
@@ -511,9 +518,6 @@
     <alias>Sector 3: Bio-life Laboratories (Meaning of “Life” or survival) </alias>
     <description><![CDATA[Laboratories where organic matter was replicated artificially, many tubes filled with multitudes of lifeforms eerily glow on the space.  <br/>The eternal artificial lights that shine on the labs, they flicker ever so slightly but the glow from the tubes are much stronger. The tubes have unidentifiable globs of matter; however, some have a few noticeable and frightening recognizable features. ]]></description>
     <picture>3-lab.gif</picture>
-    <exit alias="east" to="Sector_1_Garden_Overword">
-      <inherit name="eastdirection" />
-    </exit>
     <object name="tubes">
       <inherit name="editor_object" />
       <look>Inside the tubes are liquids that emit a pale eerily glow, some have nothing in them, others have strange chunks of felsh and matter. Others contain very distorted forms of things you recognize and one is broken.</look>
@@ -528,9 +532,6 @@
       <inherit name="editor_object" />
       <alias>Broken Tube</alias>
     </object>
-    <exit alias="south" to="Sector_4_Heat_Cooler_Blocks">
-      <inherit name="southdirection" />
-    </exit>
   </object>
   <object name="Sector_4_Heat_Cooler_Blocks">
     <inherit name="editor_room" />
@@ -568,9 +569,6 @@
     <exit alias="in" to="control_room">
       <inherit name="indirection" />
     </exit>
-    <exit alias="north" to="Sector_3_Bio_life_Laboratories">
-      <inherit name="northdirection" />
-    </exit>
   </object>
   <object name="Sector_5_Engine_Works">
     <inherit name="editor_room" />
@@ -578,12 +576,6 @@
     <alias>Sector 5: Engine Works </alias>
     <description><![CDATA[The Cosmos’s mechanical engine, in which many pieces and paths move around. There's a terminal to monitor the engine and the sector's functions.<br/>Additionately, there's a warehouse that stores extra mechanical pieces for exclusive repairs in this sector.]]></description>
     <picture>5-engine.gif</picture>
-    <exit alias="east" to="Sector_4_Heat_Cooler_Blocks">
-      <inherit name="eastdirection" />
-    </exit>
-    <exit alias="west" to="Sector_2_Habitation_Homes">
-      <inherit name="westdirection" />
-    </exit>
     <object name="engine">
       <inherit name="editor_object" />
       <look>The Cosmos engine's expands to the room itself</look>
@@ -611,9 +603,6 @@
     <exit alias="in" to="engine_warehouse">
       <inherit name="indirection" />
     </exit>
-    <exit alias="north" to="Sector_6_Administrative_Wing">
-      <inherit name="northdirection" />
-    </exit>
   </object>
   <object name="Sector_6_Administrative_Wing">
     <inherit name="editor_room" />
@@ -621,18 +610,9 @@
     <alias>Sector 6: Administrative Wing</alias>
     <description>The Cosmos’s master control room. The place where the core of Cosmos is stored, filled with monitors that display every aspect of the planet.</description>
     <picture>6-core.gif</picture>
-    <exit alias="west" to="Sector_1_Garden_Overword">
-      <inherit name="westdirection" />
-    </exit>
     <object name="control_interface">
       <inherit name="editor_object" />
       <look>The Cosmos direct control interface.</look>
     </object>
-    <exit alias="south" to="Sector_5_Engine_Works">
-      <inherit name="southdirection" />
-    </exit>
-    <exit alias="east" to="Sector_3_Bio_life_Laboratories">
-      <inherit name="eastdirection" />
-    </exit>
   </object>
 </asl>
