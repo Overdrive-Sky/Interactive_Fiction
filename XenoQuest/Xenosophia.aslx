@@ -25,7 +25,7 @@
     <showtitle />
     <appendobjectdescription type="boolean">false</appendobjectdescription>
     <enablehyperlinks />
-    <showpanes type="boolean">false</showpanes>
+    <showpanes />
     <showcommandbar />
     <showlocation />
     <classiclocation type="boolean">false</classiclocation>
@@ -46,14 +46,17 @@
     <custompaddingleft type="int">20</custompaddingleft>
     <custompaddingright type="int">20</custompaddingright>
     <customlocationtextcolour>GoldenRod</customlocationtextcolour>
-    <feature_asktell />
+    <attr name="feature_asktell" type="boolean">false</attr>
     <defaultlinkforeground>Crimson</defaultlinkforeground>
     <turnoffcompass />
     <turnoffplacesandobjects />
-    <statusandcompassattop />
+    <statusandcompassattop type="boolean">false</statusandcompassattop>
     <panestheme>Midnight</panestheme>
     <customlocationcolour>None</customlocationcolour>
     <turnoffsavebutton />
+    <turnoffinventory type="boolean">false</turnoffinventory>
+    <commandpane type="boolean">false</commandpane>
+    <attr name="command_newline" type="boolean">false</attr>
     <pov type="object">player</pov>
     <start type="script"><![CDATA[
       JS.setCss ("#gamePanel", "background:transparent")
@@ -87,24 +90,6 @@
     <dropdestination type="object">Sector_1_Garden_Overword</dropdestination>
     <beforeenter type="script">
     </beforeenter>
-    <object name="player">
-      <inherit name="editor_object" />
-      <inherit name="editor_player" />
-      <gender>N/A</gender>
-      <possessive>their</possessive>
-      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
-      <alias>Wanda</alias>
-      <take />
-      <feature_usegive />
-      <use type="boolean">false</use>
-      <attr name="pov_look">Looking good.</attr>
-      <isroom type="boolean">false</isroom>
-      <speak type="string"></speak>
-      <tell type="scriptdictionary">
-        <item key="sector_1_kind_path">
-        </item>
-      </tell>
-    </object>
     <object name="passkey_sector_2">
       <inherit name="editor_object" />
       <look>Very shiny key is the most appropriate description.</look>
@@ -128,8 +113,7 @@
             msg ("The key was used to open the door.")
             MoveObject (player, Sector_2_Habitation_Homes)
             msg ("You find yourself in Sector 2 as the AI follows you.")
-            MoveObject (ai_character, Sector_2_Habitation_Homes)
-            MakeObjectInvisible (Glowing_Key)
+            MakeObjectInvisible (passkey_sector_2)
           }
         </item>
       </selfuseon>
@@ -261,36 +245,270 @@
     <alias>Sector 2: Habitation Homes</alias>
     <description><![CDATA[Empty and abandoned housing facilities, the previous artificial wildlife had taken over, absolute silence except for low mechanic humming.  <br/>The homes comes in varies sizes, to rare apartments to common small homes. <br/>Many ventilations systems across the area, from the ceiling to the floors, cause low machine noises to flood the area. <br/>There is much evidence of old communities that were consumed by flora, such as buildings with signs (theater, cinema), playgrounds, fountains, parks. ]]></description>
     <picture>2-homes.gif</picture>
-    <exit alias="east" to="Sector_5_Engine_Works">
-      <inherit name="eastdirection" />
-    </exit>
+    <beforeenter type="script">
+    </beforeenter>
+    <beforefirstenter type="script">
+      MakeObjectInvisible (interesting_house)
+      MakeExitInvisible (Broken Door)
+    </beforefirstenter>
     <object name="interesting_house">
       <inherit name="editor_room" />
-      <object name="passkey_sector_3">
-        <inherit name="editor_object" />
-        <alias>Glowing Key</alias>
-      </object>
+      <alias>Abandoned House</alias>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <beforeenter type="script">
+      </beforeenter>
+      <enter type="script">
+        MakeObjectVisible (interesting_house)
+      </enter>
+      <onexit type="script">
+        MakeObjectVisible (interesting_house)
+      </onexit>
       <exit alias="out" to="Sector_2_Habitation_Homes">
         <inherit name="outdirection" />
       </exit>
-    </object>
-    <exit alias="in" to="interesting_house">
-      <inherit name="indirection" />
-    </exit>
-    <object name="doll">
-      <inherit name="editor_object" />
+      <object name="family_photo">
+        <inherit name="editor_object" />
+        <inventoryverbs type="stringlist">
+          <value>Look at</value>
+          <value>Drop</value>
+        </inventoryverbs>
+        <look><![CDATA[This house must have belonged to this family. This couple and their little kid and they even had a cute dog.<br/>From the name tag...the dog name seems to be Cherry.<br/>What happened to them?]]></look>
+        <alias>Family Portrait</alias>
+      </object>
+      <object name="doll">
+        <inherit name="editor_object" />
+        <inventoryverbs type="stringlist">
+          <value>Look at</value>
+          <value>Drop</value>
+        </inventoryverbs>
+        <alias>Cat Plush</alias>
+        <look><![CDATA[This cat plushie is very worned out... must have belonged to a little kid.<br/>It has a name tag...Soda! Funny name for a cat.]]></look>
+      </object>
+      <object name="chest">
+        <inherit name="editor_object" />
+        <inherit name="openable" />
+        <alias>Chest</alias>
+        <look><![CDATA[Interesting chest! It must have something inside.<br/>It's a chest with a digital password. It says the following "The bizarre adventures of __ and __!"<br/>What could this mean?]]></look>
+        <feature_container />
+        <displayverbs type="stringlist">
+          <value>Look at</value>
+          <value>Open</value>
+          <value>Close</value>
+        </displayverbs>
+        <inventoryverbs type="stringlist">
+          <value>Look at</value>
+          <value>Use</value>
+          <value>Open</value>
+          <value>Close</value>
+        </inventoryverbs>
+        <openscript type="script">
+          msg ("INSERT PASSWORD:")
+          get input {
+            if (result = "Cherry and Soda") {
+              HelperOpenObject (chest)
+              msg ("Wanda: It's a {object:passkey_sector_3}! I should pick it up.")
+            }
+            else {
+              HelperCloseObject (chest)
+              msg ("ERROR: WRONG PASSWORD")
+              msg ("Wanda: I guess I need to look around and see if I can find any hint...")
+            }
+          }
+        </openscript>
+        <object name="passkey_sector_3">
+          <inherit name="editor_object" />
+          <look>Very shiny key is the most appropriate description.</look>
+          <take />
+          <linkcolour>Crimson</linkcolour>
+          <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
+          <dropmsg>You felt the shininess leave you.</dropmsg>
+          <feature_usegive />
+          <use type="boolean">false</use>
+          <scenery />
+          <feature_wearable />
+          <alias>Glowing Key</alias>
+          <visible />
+          <usemenuprompt>Shiny Door</usemenuprompt>
+          <feature_switchable />
+          <ontake type="script">
+          </ontake>
+          <selfuseon type="scriptdictionary">
+            <item key="old_door">
+              if (game.pov.parent = Sector_2_Habitation_Homes) {
+                if (Got(passkey_sector_3)) {
+                  msg ("The key was used to open the old door.")
+                  MoveObject (player, Sector_3_Bio_life_Laboratories)
+                  msg ("You find yourself in Sector 3 as Timmy continues to follow you.")
+                  MakeObjectInvisible (passkey_sector_3)
+                }
+              }
+            </item>
+          </selfuseon>
+        </object>
+      </object>
     </object>
     <object name="poster">
       <inherit name="editor_object" />
+      <alias>Poster</alias>
+      <look>There's a poster lying on the ground. It's about a political movement...people used to unity and go agains't the old government with their rules and destruction of human freedom. People used to fight for their liberty... This seems like a different world now...</look>
+      <inventoryverbs type="stringlist">
+        <value>Look at</value>
+        <value>Drop</value>
+      </inventoryverbs>
+      <take />
+      <takemsg>Poster is now in the inventory</takemsg>
+      <dropmsg>Poster was dropped.</dropmsg>
     </object>
-    <object name="family_photo">
+    <object name="ai_character_in_sector_2">
       <inherit name="editor_object" />
+      <alias>Timmy</alias>
+      <gender>N/A</gender>
+      <article>N/A</article>
+      <possessive>N/A</possessive>
+      <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
+      <attr name="feature_startscript" type="boolean">false</attr>
+      <inventoryverbs type="stringlist">
+        <value>Look at</value>
+      </inventoryverbs>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Speak to</value>
+      </displayverbs>
+      <drop type="boolean">false</drop>
+      <take type="boolean">false</take>
+      <attr name="_initialise_" type="script">
+      </attr>
+      <askdefault type="script">
+      </askdefault>
+      <speak type="script">
+        options = Split("You mean spent time together?; Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.", ";")
+        ShowMenu ("Timmy: People used to talk, play, spend time with each other in this sector. Why do they do that? ", options, false) {
+          switch (result) {
+            case (1) {
+              msg ("Wanda: You mean spent time together?")
+            }
+            case (2) {
+              msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
+            }
+            default {
+              msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
+            }
+          }
+          if (result = "You mean spent time together?") {
+            SetTimeout (3) {
+              msg ("Timmy: Mm!")
+              SetTimeout (3) {
+                msg ("Wanda: Cooperation is one of our strongest traits, together we create life, form bonds, communities.  And we grow, protect and care for each other.  ")
+                SetTimeout (3) {
+                  msg ("Timmy: Can’t you do it alone?")
+                  SetTimeout (3) {
+                    msg ("Wanda: The company of others is one of the best things we can feel, we find ourselves in others and vice versa. The simple act of being there, together, can make a difference. ")
+                    SetTimeout (3) {
+                      msg ("Timmy: So together we can achieve more?")
+                      SetTimeout (3) {
+                        msg ("Wanda: Exactly.")
+                      }
+                      SetTimeout (3) {
+                        msg ("Timmy: Hmm, then let's search that {object:interesting_house} together! We might find some amazing things!")
+                        msg ("Let's go {exit:Broken Door}.")
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          else if (result = "Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.") {
+            SetTimeout (3) {
+              msg ("Timmy: So, it’s by force?")
+              SetTimeout (3) {
+                msg ("Wanda: Not exactly, acting alone is possible, however it can cause many problems both mentally and physically.")
+                SetTimeout (3) {
+                  msg ("Timmy: It’s the better choice and thing to do?")
+                  SetTimeout (3) {
+                    msg ("Wanda: Yes, the connection between people are in most times, beneficial to both parties. ")
+                    SetTimeout (3) {
+                      msg ("Timmy: Hmm I want to feel that! Let's search that {object:interesting_house} together!")
+                      msg ("Let's go {exit:Broken Door}.")
+                    }
+                  }
+                }
+              }
+            }
+          }
+          else {
+            SetTimeout (3) {
+              msg ("Timmy: So, it’s by force?")
+              SetTimeout (3) {
+                msg ("Wanda: Not exactly, acting alone is possible, however it can cause many problems both mentally and physically.")
+                SetTimeout (3) {
+                  msg ("Timmy: It’s the better choice and thing to do?")
+                  SetTimeout (3) {
+                    msg ("Wanda: Yes, the connection between people are in most times, beneficial to both parties. ")
+                    SetTimeout (3) {
+                      msg ("Timmy: Hmm I want to feel that! Let's search that {object:interesting_house} together!")
+                      msg ("Let's go {exit:Broken Door}.")
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        list remove (ai_character_in_sector_2.displayverbs, "Speak to")
+        MakeExitVisible (Broken Door)
+        MakeObjectVisible (interesting_house)
+      </speak>
+      <ask type="scriptdictionary" />
+      <tell type="scriptdictionary" />
     </object>
-    <exit alias="north" to="Sector_1_Garden_Overword">
-      <inherit name="northdirection" />
-    </exit>
-    <exit alias="west" to="Sector_4_Heat_Cooler_Blocks">
-      <inherit name="westdirection" />
+    <object name="old_door">
+      <inherit name="editor_object" />
+      <alias>Old Door</alias>
+      <look><![CDATA[A very old door that still seems functional.<br/>It must lead to Sector 3.]]></look>
+      <drop type="boolean">false</drop>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <inventoryverbs type="stringlist" />
+      <isroom type="boolean">false</isroom>
+      <attr name="feature_container" type="boolean">false</attr>
+      <isopen type="boolean">false</isopen>
+      <attr name="feature_startscript" type="boolean">false</attr>
+      <open />
+      <close type="boolean">false</close>
+      <visible />
+      <feature_usegive />
+      <scenery type="boolean">false</scenery>
+      <openscript type="script">
+        MakeExitVisible
+        MoveObject (player, Sector_2_Habitation_Homes)
+      </openscript>
+      <attr name="_initialise_" type="script">
+      </attr>
+    </object>
+    <object name="player">
+      <inherit name="editor_object" />
+      <inherit name="editor_player" />
+      <gender>N/A</gender>
+      <possessive>their</possessive>
+      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
+      <alias>Wanda</alias>
+      <take />
+      <feature_usegive />
+      <use type="boolean">false</use>
+      <attr name="pov_look">Looking good.</attr>
+      <isroom type="boolean">false</isroom>
+      <speak type="string"></speak>
+      <tell type="scriptdictionary">
+        <item key="sector_1_kind_path">
+        </item>
+      </tell>
+    </object>
+    <exit name="Broken Door" alias="in" to="interesting_house">
+      <inherit name="indirection" />
+      <locked type="boolean">false</locked>
+      <visible type="boolean">false</visible>
     </exit>
   </object>
   <object name="Sector_3_Bio_life_Laboratories">
