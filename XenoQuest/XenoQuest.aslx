@@ -70,7 +70,7 @@
     <inherit name="gridborder_path_ns" />
     <inherit name="editor_room" />
     <isroom />
-    <description>The room is very empty, with teh exception of a very shiny key and a very shiny door. They are so shiny in fact, that you can't look at them, making you question if they really exist in the firts place.</description>
+    <description>The room is very empty, with the exception of strange fauna, a very shiny key and a very shiny door. They are so shiny in fact, that you can't look at them, making you question if they really exist in the first place.</description>
     <picture>1-garden.gif</picture>
     <attr name="grid_width" type="int">1</attr>
     <attr name="grid_length" type="int">1</attr>
@@ -94,7 +94,7 @@
       <use type="boolean">false</use>
       <scenery />
       <feature_wearable />
-      <alias>Glowing Key</alias>
+      <alias>Blue Sectorkey</alias>
       <visible />
       <usemenuprompt>Shiny Door</usemenuprompt>
       <feature_switchable />
@@ -319,7 +319,7 @@
           <use type="boolean">false</use>
           <scenery />
           <feature_wearable />
-          <alias>Glowing Key</alias>
+          <alias>Green Sectorkey</alias>
           <visible />
           <usemenuprompt>Shiny Door</usemenuprompt>
           <feature_switchable />
@@ -508,22 +508,24 @@
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 3: Bio-life Laboratories (Meaning of “Life” or survival) </alias>
-    <description><![CDATA[Laboratories where organic matter was replicated artificially, many tubes filled with multitudes of lifeforms eerily glow on the space.  <br/>The eternal artificial lights that shine on the labs, they flicker ever so slightly but the glow from the tubes are much stronger. The tubes have unidentifiable globs of matter; however, some have a few noticeable and frightening recognizable features.  The A.I. will ask questions on why humanity keeps finding ways to survive. ]]></description>
+    <description><![CDATA[Laboratories where organic matter was replicated artificially, many tubes filled with multitudes of lifeforms eerily glow on the space.  <br/>The eternal artificial lights that shine on the labs, they flicker ever so slightly but the glow from the tubes are much stronger. The tubes have unidentifiable globs of matter; however, some have a few noticeable and frightening recognizable features. ]]></description>
     <picture>3-lab.gif</picture>
-    <exit alias="west" to="Sector_6_Administrative_Wing">
-      <inherit name="westdirection" />
-    </exit>
     <exit alias="east" to="Sector_1_Garden_Overword">
       <inherit name="eastdirection" />
     </exit>
     <object name="tubes">
       <inherit name="editor_object" />
+      <look>Inside the tubes are liquids that emit a pale eerily glow, some have nothing in them, others have strange chunks of felsh and matter. Others contain very distorted forms of things you recognize and one is broken.</look>
+      <alias>Tubes</alias>
     </object>
     <object name="artificial_lights">
       <inherit name="editor_object" />
+      <look>Artificial lights that glow on the laboratory emmit a bluelish tint.</look>
+      <alias>Lights</alias>
     </object>
     <object name="broken_tube">
       <inherit name="editor_object" />
+      <alias>Broken Tube</alias>
     </object>
     <exit alias="south" to="Sector_4_Heat_Cooler_Blocks">
       <inherit name="southdirection" />
@@ -534,6 +536,7 @@
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 4: Heat-Cooler Blocks</alias>
     <picture>4-cooler.gif</picture>
+    <description>The Cosmos's internal cooling systems, the upper blocks are uncomfortably cold while the lower ones are annoyingly hot. The coolling system itself sits on the center of the room alongside a computer. An additional control room, near the corner, is unacessible to do the heat.</description>
     <exit alias="west" to="Sector_5_Engine_Works">
       <inherit name="westdirection" />
     </exit>
@@ -542,20 +545,26 @@
     </exit>
     <object name="cooling_system">
       <inherit name="editor_object" />
+      <alias>Coolling System</alias>
+      <look>The main core of cooling system glows in the the center of the room, within it are strange liquids that fluctuate through tubes.</look>
     </object>
     <object name="computer">
       <inherit name="editor_object" />
+      <alias>Computer</alias>
+      <look>The screen says "Cosmos cooling system direct interface".</look>
     </object>
-    <object name="warm_area">
+    <object name="control_room">
       <inherit name="editor_room" />
+      <description>The room appears to the main controls for the cooling systems. </description>
       <object name="passkey_sector_5">
         <inherit name="editor_object" />
+        <alias>Orange Sectorkey</alias>
       </object>
       <exit alias="out" to="Sector_4_Heat_Cooler_Blocks">
         <inherit name="outdirection" />
       </exit>
     </object>
-    <exit alias="in" to="warm_area">
+    <exit alias="in" to="control_room">
       <inherit name="indirection" />
     </exit>
     <exit alias="north" to="Sector_3_Bio_life_Laboratories">
@@ -566,7 +575,7 @@
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 5: Engine Works </alias>
-    <description><![CDATA[The Cosmos’s mechanical engine, in which many pieces and paths move around. There's a terminal to monitor the engine and the sector's functions.<br/>Additionately, there's a warehouse that stores extra mechanical pieces for exclusive repais in this sector.]]></description>
+    <description><![CDATA[The Cosmos’s mechanical engine, in which many pieces and paths move around. There's a terminal to monitor the engine and the sector's functions.<br/>Additionately, there's a warehouse that stores extra mechanical pieces for exclusive repairs in this sector.]]></description>
     <picture>5-engine.gif</picture>
     <exit alias="east" to="Sector_4_Heat_Cooler_Blocks">
       <inherit name="eastdirection" />
@@ -576,17 +585,23 @@
     </exit>
     <object name="engine">
       <inherit name="editor_object" />
+      <look>The Cosmos engine's expands to the room itself</look>
     </object>
     <object name="terminal">
       <inherit name="editor_object" />
+      <look>Terminal denied access, it can only be accessed with a admin activation code.</look>
+      <alias>Terminal</alias>
       <object name="passkey_sector6">
         <inherit name="editor_object" />
+        <alias>Red Sectorkey</alias>
       </object>
     </object>
     <object name="engine_warehouse">
       <inherit name="editor_room" />
       <object name="activation_code">
         <inherit name="editor_object" />
+        <look>A simple admin card with a scratched name and picture, on its back there's the terminal activation code.</look>
+        <alias>Card</alias>
       </object>
       <exit alias="out" to="Sector_5_Engine_Works">
         <inherit name="outdirection" />
@@ -603,7 +618,7 @@
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 6: Administrative Wing</alias>
-    <description>The Cosmos’s main control interface. The place where Cosmo's is stored and monitors every aspect of the planet.</description>
+    <description>The Cosmos’s master control interface. The place where the core of Cosmos is stored, filled with monitors that display every aspect of the planet.</description>
     <picture>6-core.gif</picture>
     <exit alias="west" to="Sector_1_Garden_Overword">
       <inherit name="westdirection" />
