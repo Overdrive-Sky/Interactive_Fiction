@@ -104,14 +104,14 @@
       <use type="boolean">false</use>
       <scenery />
       <feature_wearable />
-      <alias>Blue Keycard</alias>
+      <alias>Blue KeyCard</alias>
       <visible />
       <usemenuprompt>Shiny Door</usemenuprompt>
       <feature_switchable />
       <ontake type="script">
       </ontake>
       <selfuseon type="scriptdictionary">
-        <item key="shiny_door">
+        <item key="Sector_2_Gate">
           if (Got(passkey_sector_2)) {
             msg ("The key was used to open the door.")
             MoveObject (player, Sector_2_Habitation_Homes)
@@ -121,9 +121,9 @@
         </item>
       </selfuseon>
     </object>
-    <object name="shiny_door">
+    <object name="Sector_2_Gate">
       <inherit name="editor_object" />
-      <alias>Old Door</alias>
+      <alias>Sector 2 Gate</alias>
       <look><![CDATA[A old rusted door that appears to be functioning.<br/>"Sector 2" is written on it. ]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
@@ -138,6 +138,7 @@
       <close type="boolean">false</close>
       <visible />
       <feature_usegive />
+      <scenery />
       <openscript type="script">
         MakeExitVisible
         MoveObject (player, Sector_2_Habitation_Homes)
@@ -241,24 +242,6 @@
       <ask type="scriptdictionary" />
       <tell type="scriptdictionary" />
     </object>
-    <object name="player">
-      <inherit name="editor_object" />
-      <inherit name="editor_player" />
-      <gender>N/A</gender>
-      <possessive>their</possessive>
-      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
-      <alias>Wanda</alias>
-      <take />
-      <feature_usegive />
-      <use type="boolean">false</use>
-      <attr name="pov_look">Looking good.</attr>
-      <isroom type="boolean">false</isroom>
-      <speak type="string"></speak>
-      <tell type="scriptdictionary">
-        <item key="sector_1_kind_path">
-        </item>
-      </tell>
-    </object>
   </object>
   <object name="Sector_2_Habitation_Homes">
     <inherit name="editor_room" />
@@ -348,14 +331,14 @@
           <use type="boolean">false</use>
           <scenery />
           <feature_wearable />
-          <alias>Green Sectorkey</alias>
+          <alias>Green KeyCard</alias>
           <visible />
           <usemenuprompt>Shiny Door</usemenuprompt>
           <feature_switchable />
           <ontake type="script">
           </ontake>
           <selfuseon type="scriptdictionary">
-            <item key="old_door">
+            <item key="Sector_3_Gate">
               if (game.pov.parent = Sector_2_Habitation_Homes) {
                 if (Got(passkey_sector_3)) {
                   msg ("The key was used to open the old door.")
@@ -478,15 +461,15 @@
           }
         }
         list remove (ai_character_in_sector_2.displayverbs, "Speak to")
-        MakeExitVisible (Broken Door)
+        MakeExitVisible (Broken House Door)
         MakeObjectVisible (interesting_house)
       </speak>
       <ask type="scriptdictionary" />
       <tell type="scriptdictionary" />
     </object>
-    <object name="old_door">
+    <object name="Sector_3_Gate">
       <inherit name="editor_object" />
-      <alias>Old Door</alias>
+      <alias>Sector  3 Gate</alias>
       <look><![CDATA[A very old door that still seems functional.<br/>It must lead to Sector 3.]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
@@ -509,7 +492,7 @@
       <attr name="_initialise_" type="script">
       </attr>
     </object>
-    <exit name="Broken Door" alias="in" to="interesting_house">
+    <exit name="Broken House Door" alias="in" to="interesting_house">
       <inherit name="indirection" />
       <locked type="boolean">false</locked>
       <visible type="boolean">false</visible>
@@ -525,11 +508,17 @@
       <inherit name="editor_object" />
       <look>Inside the tubes are liquids that emit a pale eerily glow, some have nothing in them, others have strange chunks of felsh and matter. Others contain very distorted forms of things you recognize and one is broken.</look>
       <alias>Tubes</alias>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
     </object>
     <object name="artificial_lights">
       <inherit name="editor_object" />
       <look>Artificial lights that glow on the laboratory emmit a bluelish tint.</look>
       <alias>Lights</alias>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
     </object>
     <object name="broken_tube">
       <inherit name="editor_object" />
@@ -537,13 +526,14 @@
       <feature_container />
       <displayverbs type="stringlist">
         <value>Look at</value>
-        <value>Open</value>
       </displayverbs>
       <hidechildren />
-      <listchildren />
+      <listchildren type="boolean">false</listchildren>
       <close type="boolean">false</close>
-      <look><![CDATA[Amidst all the tubes, this one is broken.<br/>Oh! There's a {object:pendrive} and a{object:passkey_sector_4} inside it!]]></look>
-      <listchildrenprefix>It contains</listchildrenprefix>
+      <look><![CDATA[Amidst all the tubes, this one is broken.<br/>Oh! There's a {object:admin_card} and a {object:passkey_sector_4} inside it!]]></look>
+      <open type="boolean">false</open>
+      <scenery />
+      <alias>Broken Tube</alias>
       <object name="admin_card">
         <inherit name="editor_object" />
         <displayverbs type="stringlist">
@@ -552,8 +542,11 @@
           <value>Use</value>
         </displayverbs>
         <feature_usegive />
-        <look>A simple admin card</look>
+        <look><![CDATA[A simple admin card for computer access.<br/>Maybe it's for Sector 4?]]></look>
         <alias>Card</alias>
+        <take />
+        <takemsg>You picked up a card with admin access.</takemsg>
+        <dropmsg>You dropped a card with admin access.</dropmsg>
         <selfuseon type="scriptdictionary">
           <item key="computer">
           </item>
@@ -570,20 +563,25 @@
         <use type="boolean">false</use>
         <scenery />
         <feature_wearable />
-        <alias>Glowing Key</alias>
+        <alias>Yellow KeyCard</alias>
         <visible />
         <usemenuprompt>Shiny Door</usemenuprompt>
         <feature_switchable />
         <ontake type="script">
         </ontake>
         <selfuseon type="scriptdictionary">
-          <item key="old_door">
-            if (game.pov.parent = Sector_2_Habitation_Homes) {
-              if (Got(passkey_sector_3)) {
-                msg ("The key was used to open the old door.")
-                MoveObject (player, Sector_3_Bio_life_Laboratories)
-                msg ("You find yourself in Sector 3 as Timmy continues to follow you.")
-                MakeObjectInvisible (passkey_sector_3)
+          <item key="Sector_4_Gate">
+            if (game.pov.parent = Sector_3_Bio_life_Laboratories) {
+              if (Got(admin_card)) {
+                if (Got(passkey_sector_4)) {
+                  msg ("The key was used to open the old door.")
+                  MoveObject (player, Sector_4_Heat_Cooler_Blocks)
+                  msg ("You find yourself in Sector 3 as Timmy continues to follow you.")
+                  MakeObjectInvisible (passkey_sector_4)
+                }
+              }
+              else {
+                msg ("Timmy: You should pick the {object:admin_card} from the {object:broken_tube}. I'm sure it is important!")
               }
             }
           </item>
@@ -659,18 +657,20 @@
             }
           }
           else {
-            msg ("Wanda: Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.")
+            msg ("Wanda: It is fear, the absolute fear of oblivion. People cling to that primordial fear despite its inevitability. So, we push towards our species’ survival, to the point of trying to recreate nature.")
             SetTimeout (3) {
-              msg ("Timmy: So, it’s by force?")
+              msg ("Timmy: Why?")
               SetTimeout (3) {
-                msg ("Wanda: Not exactly, acting alone is possible, however it can cause many problems both mentally and physically.")
+                msg ("Wanda: So, we won’t be forgotten in time, so we can leave an impact.")
                 SetTimeout (3) {
-                  msg ("Timmy: It’s the better choice and thing to do?")
+                  msg ("Timmy: That is “Life”? ")
                   SetTimeout (3) {
-                    msg ("Wanda: Yes, the connection between people are in most times, beneficial to both parties. ")
+                    msg ("Wanda: Maybe. There never was a single answer.")
                     SetTimeout (3) {
-                      msg ("Timmy: Hmm I want to feel that! Let's search that {object:interesting_house} together!")
-                      msg ("Let's go {exit:Broken Door}.")
+                      msg ("Timmy: Hmm.")
+                      SetTimeout (3) {
+                        msg ("Timmy: Hey! Have you checked that {object:broken_tube}? ")
+                      }
                     }
                   }
                 }
@@ -678,16 +678,53 @@
             }
           }
         }
-        list remove (ai_character_in_sector_2.displayverbs, "Speak to")
-        MakeExitVisible (Broken Door)
-        MakeObjectVisible (interesting_house)
+        list remove (ai_character_in_sector_3.displayverbs, "Speak to")
       </speak>
       <ask type="scriptdictionary" />
       <tell type="scriptdictionary" />
     </object>
-    <object name="Sector_4_Door">
+    <object name="player">
       <inherit name="editor_object" />
-      <alias>Sector  4 Door</alias>
+      <inherit name="editor_player" />
+      <gender>N/A</gender>
+      <possessive>their</possessive>
+      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
+      <alias>Wanda</alias>
+      <take />
+      <feature_usegive />
+      <use type="boolean">false</use>
+      <attr name="pov_look">Looking good.</attr>
+      <isroom type="boolean">false</isroom>
+      <speak type="string"></speak>
+      <tell type="scriptdictionary">
+        <item key="sector_1_kind_path">
+        </item>
+      </tell>
+    </object>
+    <object name="Sector_4_Gate">
+      <inherit name="editor_object" />
+      <alias>Sector 4 Gate</alias>
+      <look><![CDATA[A very big steel door. <br/>It mentions "Sector 5".]]></look>
+      <drop type="boolean">false</drop>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <inventoryverbs type="stringlist" />
+      <isroom type="boolean">false</isroom>
+      <attr name="feature_container" type="boolean">false</attr>
+      <isopen type="boolean">false</isopen>
+      <attr name="feature_startscript" type="boolean">false</attr>
+      <open />
+      <close type="boolean">false</close>
+      <visible />
+      <feature_usegive />
+      <scenery type="boolean">false</scenery>
+      <openscript type="script">
+        MakeExitVisible
+        MoveObject (player, Sector_2_Habitation_Homes)
+      </openscript>
+      <attr name="_initialise_" type="script">
+      </attr>
     </object>
   </object>
   <object name="Sector_4_Heat_Cooler_Blocks">
@@ -717,7 +754,7 @@
       <description>The room appears to the main controls for the cooling systems. </description>
       <object name="passkey_sector_5">
         <inherit name="editor_object" />
-        <alias>Orange Sectorkey</alias>
+        <alias>Orange KeyCard</alias>
       </object>
       <exit alias="out" to="Sector_4_Heat_Cooler_Blocks">
         <inherit name="outdirection" />
@@ -741,9 +778,9 @@
       <inherit name="editor_object" />
       <look>Terminal denied access, it can only be accessed with a admin activation code.</look>
       <alias>Terminal</alias>
-      <object name="passkey_sector6">
+      <object name="passkey_sector_6">
         <inherit name="editor_object" />
-        <alias>Red Sectorkey</alias>
+        <alias>Red KeyCard</alias>
       </object>
     </object>
     <object name="engine_warehouse">
