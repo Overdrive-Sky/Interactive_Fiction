@@ -54,6 +54,9 @@
     <panestheme>Midnight</panestheme>
     <customlocationcolour>None</customlocationcolour>
     <turnoffsavebutton />
+    <turnoffinventory type="boolean">false</turnoffinventory>
+    <commandpane type="boolean">false</commandpane>
+    <attr name="command_newline" type="boolean">false</attr>
     <pov type="object">player</pov>
     <start type="script">
       JS.setCss ("#gamePanel", "background:transparent")
@@ -62,9 +65,6 @@
     </start>
     <roomenter type="script">
     </roomenter>
-    <turnoffinventory type="boolean">false</turnoffinventory>
-    <commandpane type="boolean">false</commandpane>
-    <attr name="command_newline" type="boolean">false</attr>
   </game>
   <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
@@ -239,12 +239,11 @@
     <description><![CDATA[Empty and abandoned housing facilities, the previous artificial wildlife had taken over, absolute silence except for low mechanic humming.  <br/>The homes comes in varies sizes, to rare apartments to common small homes. <br/>Many ventilations systems across the area, from the ceiling to the floors, cause low machine noises to flood the area. <br/>There is much evidence of old communities that were consumed by flora, such as buildings with signs (theater, cinema), playgrounds, fountains, parks. ]]></description>
     <picture>2-homes.gif</picture>
     <beforeenter type="script">
-      MakeObjectInvisible (interesting_house)
-      if (GetBoolean(ai_character_in_sector_2, "spoken_to")) {
-        MakeObjectVisible (interesting_house)
-        HelperOpenObject (interesting_house)
-      }
     </beforeenter>
+    <beforefirstenter type="script">
+      MakeObjectInvisible (interesting_house)
+      MakeExitInvisible (Broken Door)
+    </beforefirstenter>
     <object name="interesting_house">
       <inherit name="editor_room" />
       <alias>Abandoned House</alias>
@@ -284,20 +283,6 @@
         <alias>Chest</alias>
         <look><![CDATA[Interesting chest! It must have something inside.<br/>It's a chest with a digital password. It says the following "The bizarre adventures of __ and __!"<br/>What could this mean?]]></look>
         <feature_container />
-        <openscript type="script">
-          msg ("Insert password:")
-          get input {
-            if ("Cherry and Soda") {
-              HelperOpenObject (chest)
-              msg ("Wanda: It's a {object:passkey_sector_3}! I should pick it up.")
-            }
-            else {
-              HelperCloseObject (chest)
-              msg ("ERROR: WRONG PASSWORD")
-              msg ("Wanda: I guess I need to look around and see if I can find any hint...")
-            }
-          }
-        </openscript>
         <displayverbs type="stringlist">
           <value>Look at</value>
           <value>Open</value>
@@ -309,6 +294,20 @@
           <value>Open</value>
           <value>Close</value>
         </inventoryverbs>
+        <openscript type="script">
+          msg ("INSERT PASSWORD:")
+          get input {
+            if (result = "Cherry and Soda") {
+              HelperOpenObject (chest)
+              msg ("Wanda: It's a {object:passkey_sector_3}! I should pick it up.")
+            }
+            else {
+              HelperCloseObject (chest)
+              msg ("ERROR: WRONG PASSWORD")
+              msg ("Wanda: I guess I need to look around and see if I can find any hint...")
+            }
+          }
+        </openscript>
         <object name="passkey_sector_3">
           <inherit name="editor_object" />
           <look>Very shiny key is the most appropriate description.</look>
@@ -375,7 +374,7 @@
       <askdefault type="script">
       </askdefault>
       <speak type="script">
-        options = Split("You mean spent time together?;Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.", ";")
+        options = Split("You mean spent time together?; Humanity is a social species. Our unity is essential to our survival, in most cases we’ll perish if we act completely alone.", ";")
         ShowMenu ("Timmy: People used to talk, play, spend time with each other in this sector. Why do they do that? ", options, false) {
           switch (result) {
             case (1) {
@@ -404,6 +403,7 @@
                       }
                       SetTimeout (3) {
                         msg ("Timmy: Hmm, then let's search that {object:interesting_house} together! We might find some amazing things!")
+                        msg ("Let's go {exit:Broken Door}.")
                       }
                     }
                   }
@@ -422,6 +422,7 @@
                     msg ("Wanda: Yes, the connection between people are in most times, beneficial to both parties. ")
                     SetTimeout (3) {
                       msg ("Timmy: Hmm I want to feel that! Let's search that {object:interesting_house} together!")
+                      msg ("Let's go {exit:Broken Door}.")
                     }
                   }
                 }
@@ -439,6 +440,7 @@
                     msg ("Wanda: Yes, the connection between people are in most times, beneficial to both parties. ")
                     SetTimeout (3) {
                       msg ("Timmy: Hmm I want to feel that! Let's search that {object:interesting_house} together!")
+                      msg ("Let's go {exit:Broken Door}.")
                     }
                   }
                 }
@@ -446,10 +448,9 @@
             }
           }
         }
-        MakeObjectVisible (interesting_house)
         list remove (ai_character_in_sector_2.displayverbs, "Speak to")
-        create exit ("\"Abandoned House\"", Sector_2_Habitation_Homes, interesting_house)
-        SetObjectFlagOn (ai_character_in_sector_2, "spoken_to")
+        MakeExitVisible (Broken Door)
+        MakeObjectVisible (interesting_house)
       </speak>
       <ask type="scriptdictionary" />
       <tell type="scriptdictionary" />
@@ -471,13 +472,13 @@
       <close type="boolean">false</close>
       <visible />
       <feature_usegive />
+      <scenery type="boolean">false</scenery>
       <openscript type="script">
         MakeExitVisible
         MoveObject (player, Sector_2_Habitation_Homes)
       </openscript>
       <attr name="_initialise_" type="script">
       </attr>
-      <scenery type="boolean">false</scenery>
     </object>
     <object name="player">
       <inherit name="editor_object" />
@@ -497,6 +498,11 @@
         </item>
       </tell>
     </object>
+    <exit name="Broken Door" alias="in" to="interesting_house">
+      <inherit name="indirection" />
+      <locked type="boolean">false</locked>
+      <visible type="boolean">false</visible>
+    </exit>
   </object>
   <object name="Sector_3_Bio_life_Laboratories">
     <inherit name="editor_room" />
