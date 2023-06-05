@@ -85,7 +85,7 @@
     </beforeenter>
     <object name="passkey_sector_2">
       <inherit name="editor_object" />
-      <look>Very shiny key is the most appropriate description.</look>
+      <look>A blue keycard with "Sector 2" written on it.</look>
       <take />
       <linkcolour>Crimson</linkcolour>
       <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
@@ -94,7 +94,7 @@
       <use type="boolean">false</use>
       <scenery />
       <feature_wearable />
-      <alias>Blue Sectorkey</alias>
+      <alias>Blue Keycard</alias>
       <visible />
       <usemenuprompt>Shiny Door</usemenuprompt>
       <feature_switchable />
@@ -113,8 +113,8 @@
     </object>
     <object name="shiny_door">
       <inherit name="editor_object" />
-      <alias>Shiny Door</alias>
-      <look><![CDATA[A very shiny door. So shiny you cant actually see it.<br/>Seems to be close, there must be a key.]]></look>
+      <alias>Old Door</alias>
+      <look><![CDATA[A old rusted door that appears to be functioning.<br/>"Sector 2" is written on it. ]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
         <value>Look at</value>
@@ -256,6 +256,7 @@
       <onexit type="script">
         MakeObjectVisible (interesting_house)
       </onexit>
+      <description>An old abandoned house filled</description>
       <exit alias="out" to="Sector_2_Habitation_Homes">
         <inherit name="outdirection" />
       </exit>
@@ -618,13 +619,14 @@
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 6: Administrative Wing</alias>
-    <description>The Cosmos’s master control interface. The place where the core of Cosmos is stored, filled with monitors that display every aspect of the planet.</description>
+    <description>The Cosmos’s master control room. The place where the core of Cosmos is stored, filled with monitors that display every aspect of the planet.</description>
     <picture>6-core.gif</picture>
     <exit alias="west" to="Sector_1_Garden_Overword">
       <inherit name="westdirection" />
     </exit>
     <object name="control_interface">
       <inherit name="editor_object" />
+      <look>The Cosmos direct control interface.</look>
     </object>
     <exit alias="south" to="Sector_5_Engine_Works">
       <inherit name="southdirection" />
