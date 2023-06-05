@@ -20,3 +20,5 @@
 [0605/004752:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
 [0605/015412:ERROR:renderer_main.cc(207)] Running without renderer sandbox
 [0605/015523:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
+[0605/022900:ERROR:renderer_main.cc(207)] Running without renderer sandbox
+[0605/032611:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
