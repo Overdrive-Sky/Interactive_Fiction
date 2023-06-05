@@ -68,7 +68,7 @@
         ClearScreen
         JS.setCss ("#status", "display:block")
         SetTimeout (2) {
-          msg ("Timmy: Hello")
+          msg ("Timmy: Hello! My name is Timmy, I’m a guide AI of the Cosmos: Cosmic Original Synthetic Maker Omni System. This system needs a check-up, thank you for arriving.")
         }
       }
       JS.setCss ("#endWaitLink", "color:rgb(224, 255, 255)")
@@ -276,6 +276,7 @@
       <inherit name="editor_room" />
       <alias>Abandoned House</alias>
       <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <description>An old abandoned house filled</description>
       <beforeenter type="script">
       </beforeenter>
       <enter type="script">
@@ -284,7 +285,6 @@
       <onexit type="script">
         MakeObjectVisible (interesting_house)
       </onexit>
-      <description>An old abandoned house filled</description>
       <exit alias="out" to="Sector_2_Habitation_Homes">
         <inherit name="outdirection" />
       </exit>
@@ -552,12 +552,12 @@
           <value>Use</value>
         </displayverbs>
         <feature_usegive />
+        <look>A simple admin card</look>
+        <alias>Card</alias>
         <selfuseon type="scriptdictionary">
           <item key="computer">
           </item>
         </selfuseon>
-        <look>A simple admin card</look>
-        <alias>Card</alias>
       </object>
       <object name="passkey_sector_4">
         <inherit name="editor_object" />
