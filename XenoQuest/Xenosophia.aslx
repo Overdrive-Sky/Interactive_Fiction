@@ -517,12 +517,6 @@
     <alias>Sector 3: Bio-life Laboratories (Meaning of “Life” or survival) </alias>
     <description><![CDATA[Laboratories where organic matter was replicated artificially, many tubes filled with multitudes of lifeforms eerily glow on the space.  <br/>The eternal artificial lights that shine on the labs, they flicker ever so slightly but the glow from the tubes are much stronger. The tubes have unidentifiable globs of matter; however, some have a few noticeable and frightening recognizable features.  The A.I. will ask questions on why humanity keeps finding ways to survive. ]]></description>
     <picture>3-lab.gif</picture>
-    <exit alias="west" to="Sector_6_Administrative_Wing">
-      <inherit name="westdirection" />
-    </exit>
-    <exit alias="east" to="Sector_1_Garden_Overword">
-      <inherit name="eastdirection" />
-    </exit>
     <object name="tubes">
       <inherit name="editor_object" />
     </object>
@@ -532,21 +526,12 @@
     <object name="broken_tube">
       <inherit name="editor_object" />
     </object>
-    <exit alias="south" to="Sector_4_Heat_Cooler_Blocks">
-      <inherit name="southdirection" />
-    </exit>
   </object>
   <object name="Sector_4_Heat_Cooler_Blocks">
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 4: Heat-Cooler Blocks</alias>
     <picture>4-cooler.gif</picture>
-    <exit alias="west" to="Sector_5_Engine_Works">
-      <inherit name="westdirection" />
-    </exit>
-    <exit alias="east" to="Sector_2_Habitation_Homes">
-      <inherit name="eastdirection" />
-    </exit>
     <object name="cooling_system">
       <inherit name="editor_object" />
     </object>
@@ -565,9 +550,6 @@
     <exit alias="in" to="warm_area">
       <inherit name="indirection" />
     </exit>
-    <exit alias="north" to="Sector_3_Bio_life_Laboratories">
-      <inherit name="northdirection" />
-    </exit>
   </object>
   <object name="Sector_5_Engine_Works">
     <inherit name="editor_room" />
@@ -575,12 +557,6 @@
     <alias>Sector 5: Engine Works </alias>
     <description><![CDATA[The Cosmos’s mechanical engine, in which many pieces and paths move around. There's a terminal to monitor the engine and the sector's functions.<br/>Additionately, there's a warehouse that stores extra mechanical pieces for exclusive repais in this sector.]]></description>
     <picture>5-engine.gif</picture>
-    <exit alias="east" to="Sector_4_Heat_Cooler_Blocks">
-      <inherit name="eastdirection" />
-    </exit>
-    <exit alias="west" to="Sector_2_Habitation_Homes">
-      <inherit name="westdirection" />
-    </exit>
     <object name="engine">
       <inherit name="editor_object" />
     </object>
@@ -602,9 +578,6 @@
     <exit alias="in" to="engine_warehouse">
       <inherit name="indirection" />
     </exit>
-    <exit alias="north" to="Sector_6_Administrative_Wing">
-      <inherit name="northdirection" />
-    </exit>
   </object>
   <object name="Sector_6_Administrative_Wing">
     <inherit name="editor_room" />
@@ -612,17 +585,8 @@
     <alias>Sector 6: Administrative Wing</alias>
     <description>The Cosmos’s main control interface. The place where Cosmo's is stored and monitors every aspect of the planet.</description>
     <picture>6-core.gif</picture>
-    <exit alias="west" to="Sector_1_Garden_Overword">
-      <inherit name="westdirection" />
-    </exit>
     <object name="control_interface">
       <inherit name="editor_object" />
     </object>
-    <exit alias="south" to="Sector_5_Engine_Works">
-      <inherit name="southdirection" />
-    </exit>
-    <exit alias="east" to="Sector_3_Bio_life_Laboratories">
-      <inherit name="eastdirection" />
-    </exit>
   </object>
 </asl>
