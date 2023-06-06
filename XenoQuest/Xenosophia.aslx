@@ -77,6 +77,7 @@
     ]]></start>
     <roomenter type="script">
     </roomenter>
+    <autodescription_youarein_useprefix />
   </game>
   <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
@@ -91,7 +92,7 @@
     <attr name="grid_label_colour">Coral</attr>
     <attr name="grid_border">DarkGoldenRod</attr>
     <alias>Sector 1: Garden Overworld</alias>
-    <usedefaultprefix />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
     <dropdestination type="object">Sector_1_Garden_Overword</dropdestination>
     <beforeenter type="script">
     </beforeenter>
