@@ -64,6 +64,7 @@
       JS.setCss ("#status", "background:rgb(6, 14, 25)")
       JS.setCss ("#status", "display:none")
       JS.setCss ("#endWaitLink", "color:rgb(224, 255, 255)")
+      play sound ("space_music.mp3", false, true)
       msg ("No one really knows when the aberrations started to happen, or when the term came into fruition, but several have tried to get to bottom of it. No one has come forth with a reasonable explanation or course of action so far.<br/><br/>Since light-speed space travel is a fairly democratized affair, there really are no drawbacks to setting sale to nearby planetary systems and sight-seeing to one’s heart's content. Many have wandered aimlessly in hopes of finding some kind of truth that would recontextualize everything, while others built super-computers in order to retrieve anything and everything that could be useful from the surrounding data. <br/><br/>You are a simple maintenance worker for several of these super-computers, but for a while now, you have been having strange visions of a small celestial body in a neighbouring planetary system. Recklessly setting your makeshift craft’s trajectory to that of the supposed heavenly object, you end up crash landing on the small planet, and while you came out unscathed, the same could not be said for your trip companion. Stranded, but curious, you decide to delve further into the unknown.")
       wait {
         ClearScreen
