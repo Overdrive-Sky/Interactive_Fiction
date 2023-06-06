@@ -152,7 +152,7 @@
       <gender>N/A</gender>
       <article>N/A</article>
       <possessive>N/A</possessive>
-      <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
+      <look>The AI that commands Planet Cosmos, in the form a child. They seem very curious about me.</look>
       <attr name="feature_startscript" type="boolean">false</attr>
       <inventoryverbs type="stringlist">
         <value>Look at</value>
@@ -259,7 +259,7 @@
       <inherit name="editor_room" />
       <alias>Abandoned House</alias>
       <usedefaultprefix type="boolean">false</usedefaultprefix>
-      <description>An old abandoned house filled</description>
+      <description>An old abandoned house filled with old memorabilia.   </description>
       <beforeenter type="script">
       </beforeenter>
       <enter type="script">
@@ -323,7 +323,7 @@
         </openscript>
         <object name="passkey_sector_3">
           <inherit name="editor_object" />
-          <look>Very shiny key is the most appropriate description.</look>
+          <look>A green keycard with "Sector 3" written on it.</look>
           <take />
           <linkcolour>Crimson</linkcolour>
           <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
@@ -371,7 +371,7 @@
       <gender>N/A</gender>
       <article>N/A</article>
       <possessive>N/A</possessive>
-      <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
+      <look>The AI that commands Planet Cosmos, in the form a child. They seem very curious about me.</look>
       <attr name="feature_startscript" type="boolean">false</attr>
       <inventoryverbs type="stringlist">
         <value>Look at</value>
@@ -471,7 +471,7 @@
     <object name="Sector_3_Gate">
       <inherit name="editor_object" />
       <alias>Sector  3 Gate</alias>
-      <look><![CDATA[A very old gate that still seems functional.<br/>It must lead to Sector 3.]]></look>
+      <look><![CDATA[A very old gate that still seems functional.<br/>"S3 Bio-life Labs" is written on it.]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
         <value>Look at</value>
@@ -583,7 +583,7 @@
       </object>
       <object name="passkey_sector_4">
         <inherit name="editor_object" />
-        <look>Very shiny key is the most appropriate description.</look>
+        <look>A yellow keycard with "Sector 4" written on it.</look>
         <take />
         <linkcolour>Crimson</linkcolour>
         <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
@@ -623,7 +623,7 @@
       <gender>N/A</gender>
       <article>N/A</article>
       <possessive>N/A</possessive>
-      <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
+      <look>The AI that commands Planet Cosmos, in the form a child. They seem very curious about me.</look>
       <attr name="feature_startscript" type="boolean">false</attr>
       <inventoryverbs type="stringlist">
         <value>Look at</value>
@@ -715,7 +715,7 @@
     <object name="Sector_4_Gate">
       <inherit name="editor_object" />
       <alias>Sector 4 Gate</alias>
-      <look><![CDATA[A very big steel gate. <br/>It mentions "Sector 5".]]></look>
+      <look><![CDATA[A very big steel gate. <br/>" S4 Blocks" is written on it.]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
         <value>Look at</value>
@@ -974,19 +974,23 @@
     <picture>5-engine.gif</picture>
     <object name="engine">
       <inherit name="editor_object" />
-      <look>The Cosmos engine's expands to the room itself</look>
+      <look>The Cosmos engine's expands to the room itself and many mechanical noises are heard throughout it.</look>
+      <alias>Engine</alias>
     </object>
     <object name="terminal">
       <inherit name="editor_object" />
-      <look>Terminal denied access, it can only be accessed with a admin activation code.</look>
+      <look>Administrative Wing access terminal, it can only be accessed with a admin activation code.</look>
       <alias>Terminal</alias>
       <object name="passkey_sector_6">
         <inherit name="editor_object" />
         <alias>Red KeyCard</alias>
+        <look>A red keycard with "Sector 6" written on it.</look>
       </object>
     </object>
     <object name="engine_warehouse">
       <inherit name="editor_room" />
+      <description>Inside the warehouse are many tools of large sizes, none of which you can pick up. You look down a notice a {object:activation_code}.</description>
+      <alias>Warehouse</alias>
       <object name="activation_code">
         <inherit name="editor_object" />
         <look>A simple admin card with a scratched name and picture, on its back there's the terminal activation code.</look>
@@ -1004,11 +1008,12 @@
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 6: Administrative Wing</alias>
-    <description>The Cosmos’s master control room. The place where the core of Cosmos is stored, filled with monitors that display every aspect of the planet.</description>
+    <description><![CDATA[The Cosmos’s master control room. The place where the core of Cosmos is stored, filled with monitors that display every aspect of the planet.<br/>Besides the core is the the control interface]]></description>
     <picture>6-core.gif</picture>
     <object name="control_interface">
       <inherit name="editor_object" />
-      <look>The Cosmos direct control interface.</look>
+      <look>The Cosmos's direct master interface. The interface itself is damaged and right below it is the shutdown panel.</look>
+      <alias>Interface</alias>
     </object>
   </object>
 </asl>
