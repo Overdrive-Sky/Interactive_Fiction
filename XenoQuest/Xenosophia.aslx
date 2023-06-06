@@ -918,7 +918,7 @@
     <object name="Sector_5_Gate">
       <inherit name="editor_object" />
       <alias>Sector 5 Gate</alias>
-      <look><![CDATA[This gate seems to be reinforced in comparison with the others.<br/>It leads to "Sector 6", which is the sector were the engines are running.]]></look>
+      <look><![CDATA[This gate seems to be reinforced in comparison with the others.<br/>It leads to "Sector 5", which is the sector were the engines are running.]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
         <value>Look at</value>
@@ -940,28 +940,6 @@
       <attr name="_initialise_" type="script">
       </attr>
     </object>
-    <object name="player">
-      <inherit name="editor_object" />
-      <inherit name="editor_player" />
-      <gender>N/A</gender>
-      <possessive>their</possessive>
-      <look>You are Wanda. Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. They're a very stubborn person, filled with tenacity. Unlike previous workers, they're more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, they mostly only responds to questions directed at them.</look>
-      <alias>Wanda</alias>
-      <take type="boolean">false</take>
-      <feature_usegive />
-      <use type="boolean">false</use>
-      <attr name="pov_look">Looking good.</attr>
-      <isroom type="boolean">false</isroom>
-      <speak type="string"></speak>
-      <tell type="scriptdictionary">
-        <item key="sector_1_kind_path">
-        </item>
-      </tell>
-      <displayverbs type="stringlist">
-        <value>Look at</value>
-      </displayverbs>
-      <drop type="boolean">false</drop>
-    </object>
     <exit name="Control Room Entrance" alias="in" to="control_room">
       <inherit name="indirection" />
       <visible />
@@ -976,37 +954,251 @@
     <alias>Sector 5: Engine Works </alias>
     <description><![CDATA[The Cosmos’s mechanical engine, in which many pieces and paths move around. There's a terminal to monitor the engine and the sector's functions.<br/>Additionately, there's a warehouse that stores extra mechanical pieces for exclusive repairs in this sector.]]></description>
     <picture>5-engine.gif</picture>
+    <beforefirstenter type="script">
+      MakeObjectInvisible (engine_warehouse)
+    </beforefirstenter>
     <object name="engine">
       <inherit name="editor_object" />
       <look>The Cosmos engine's expands to the room itself and many mechanical noises are heard throughout it.</look>
       <alias>Engine</alias>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <drop type="boolean">false</drop>
     </object>
     <object name="terminal">
       <inherit name="editor_object" />
+      <inherit name="container_open" />
       <look>Administrative Wing access terminal, it can only be accessed with a admin activation code.</look>
       <alias>Terminal</alias>
+      <drop type="boolean">false</drop>
+      <feature_usegive />
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <linkcolour>Crimson</linkcolour>
+      <scenery type="boolean">false</scenery>
+      <feature_container />
+      <open />
+      <close type="boolean">false</close>
+      <isopen type="boolean">false</isopen>
+      <openmsg>ACTIVATION :: SUCESS</openmsg>
       <object name="passkey_sector_6">
         <inherit name="editor_object" />
-        <alias>Red KeyCard</alias>
         <look>A red keycard with "Sector 6" written on it.</look>
+        <take />
+        <linkcolour>Crimson</linkcolour>
+        <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
+        <dropmsg>You felt the shininess leave you.</dropmsg>
+        <feature_usegive />
+        <use type="boolean">false</use>
+        <scenery />
+        <feature_wearable />
+        <alias>Red KeyCard</alias>
+        <visible />
+        <usemenuprompt>Shiny Door</usemenuprompt>
+        <feature_switchable />
+        <ontake type="script">
+        </ontake>
+        <selfuseon type="scriptdictionary">
+          <item key="Sector_6_Gate">
+            if (game.pov.parent = Sector_5_Engine_Works) {
+              if (Got(passkey_sector_6)) {
+                msg ("The key was used to open the gate.")
+                MoveObject (player, Sector_6_Administrative_Wing)
+                msg ("You find yourself in Sector 6 as Timmy continues to follow you.")
+                MakeObjectInvisible (passkey_sector_6)
+              }
+            }
+          </item>
+        </selfuseon>
       </object>
     </object>
     <object name="engine_warehouse">
       <inherit name="editor_room" />
       <description>Inside the warehouse are many tools of large sizes, none of which you can pick up. You look down a notice a {object:activation_code}.</description>
       <alias>Warehouse</alias>
+      <usedefaultprefix />
       <object name="activation_code">
         <inherit name="editor_object" />
         <look>A simple admin card with a scratched name and picture, on its back there's the terminal activation code.</look>
-        <alias>Card</alias>
+        <alias>Activation Card</alias>
+        <take />
+        <takemsg>You picked up the Activation Code.</takemsg>
+        <dropmsg>You dropped the Activation Code.</dropmsg>
+        <feature_usegive />
+        <displayverbs type="stringlist">
+          <value>Look at</value>
+          <value>Take</value>
+          <value>Use</value>
+        </displayverbs>
+        <selfuseon type="scriptdictionary">
+          <item key="terminal">
+            if (game.pov.parent = Sector_5_Engine_Works) {
+              HelperOpenObject (terminal)
+              msg ("Wanda: The activation code worked!")
+              msg ("Wanda: It unlocked a drawer with the {object:passkey_sector_6} inside!")
+              list remove (activation_code.displayverbs, "Use")
+            }
+          </item>
+        </selfuseon>
       </object>
-      <exit alias="out" to="Sector_5_Engine_Works">
+      <exit name="Sector 5" alias="out" to="Sector_5_Engine_Works">
         <inherit name="outdirection" />
+        <suffix>to Sector 5</suffix>
       </exit>
     </object>
-    <exit alias="in" to="engine_warehouse">
+    <exit name="Warehouse" alias="in" to="engine_warehouse">
       <inherit name="indirection" />
+      <suffix> to the Warehouse</suffix>
+      <locked />
+      <lockmessage>The Engine Warehouse seems to be locked.</lockmessage>
     </exit>
+    <object name="ai_character_in_sector_5">
+      <inherit name="editor_object" />
+      <alias>Timmy</alias>
+      <gender>N/A</gender>
+      <article>N/A</article>
+      <possessive>N/A</possessive>
+      <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
+      <attr name="feature_startscript" type="boolean">false</attr>
+      <inventoryverbs type="stringlist">
+        <value>Look at</value>
+      </inventoryverbs>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Speak to</value>
+      </displayverbs>
+      <drop type="boolean">false</drop>
+      <take type="boolean">false</take>
+      <attr name="_initialise_" type="script">
+      </attr>
+      <askdefault type="script">
+      </askdefault>
+      <speak type="script">
+        options = Split("Be Kind;Be Direct", ";")
+        ShowMenu ("Timmy: Humanity is mostly known for its technology, but why exactly does it exist?", options, false) {
+          switch (result) {
+            case (1) {
+              msg ("Be Kind")
+            }
+            case (2) {
+              msg ("Be Direct")
+            }
+          }
+          if (result = "Be Kind") {
+            msg ("Wanda: It’s the culmination of our knowledge and wisdom. It gives us advantages that we can’t obtain naturally. ")
+            SetTimeout (3) {
+              msg ("Timmy: So, with technology humans can be perfect?")
+              SetTimeout (3) {
+                msg ("Wanda: No, we’ll never be truly perfect, our imperfections are what makes human, technology is there to help us…")
+                SetTimeout (3) {
+                  msg ("Timmy: To help… just like what I’m doing?")
+                  SetTimeout (3) {
+                    msg ("Wanda: Yes!")
+                    SetTimeout (3) {
+                      MakeObjectVisible (engine_warehouse)
+                      UnlockExit (Warehouse)
+                      msg ("Timmy: It seems I have access to this Sector's controls. I have unlocked the entrance to the {object:engine_warehouse}!")
+                    }
+                  }
+                }
+              }
+            }
+          }
+          else if (result = "Be Direct") {
+            msg ("Wanda: It was created to ease our existence, a way to fix our natural disadvantages.")
+            SetTimeout (3) {
+              msg ("Timmy: So, is it good?")
+              SetTimeout (3) {
+                msg ("Wanda: A lot of change needs to happen, and many grew too reliant on it. But it also brought a lot of goodness.")
+                SetTimeout (3) {
+                  msg ("Timmy: What matters is balance?")
+                  SetTimeout (3) {
+                    msg ("Wanda: Yes, like everything balance is the key.")
+                    SetTimeout (3) {
+                      MakeObjectVisible (engine_warehouse)
+                      UnlockExit (Warehouse)
+                      msg ("Timmy: It seems I have access to this Sector's controls. I have unlocked the entrance to the {object:engine_warehouse}!")
+                    }
+                  }
+                }
+              }
+            }
+          }
+          else if (result = "Be Direct") {
+            msg ("Wanda: It was created to ease our existence, a way to fix our natural disadvantages.")
+            SetTimeout (3) {
+              msg ("Timmy: So, is it good?")
+              SetTimeout (3) {
+                msg ("Wanda: A lot of change needs to happen, and many grew too reliant on it. But it also brought a lot of goodness.")
+                SetTimeout (3) {
+                  msg ("Timmy: What matters is balance?")
+                  SetTimeout (3) {
+                    msg ("Wanda: Yes, like everything balance is the key.")
+                    SetTimeout (3) {
+                      MakeObjectVisible (engine_warehouse)
+                      UnlockExit (Warehouse)
+                      msg ("Timmy: It seems I have access to this Sector's controls. I have unlocked the entrance to the {object:engine_warehouse}!")
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        list remove (ai_character_in_sector_5.displayverbs, "Speak to")
+      </speak>
+      <ask type="scriptdictionary" />
+      <tell type="scriptdictionary" />
+    </object>
+    <object name="player">
+      <inherit name="editor_object" />
+      <inherit name="editor_player" />
+      <gender>N/A</gender>
+      <possessive>their</possessive>
+      <look>You are Wanda. Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. They're a very stubborn person, filled with tenacity. Unlike previous workers, they're more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, they mostly only responds to questions directed at them.</look>
+      <alias>Wanda</alias>
+      <take type="boolean">false</take>
+      <feature_usegive />
+      <use type="boolean">false</use>
+      <attr name="pov_look">Looking good.</attr>
+      <isroom type="boolean">false</isroom>
+      <speak type="string"></speak>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <drop type="boolean">false</drop>
+      <tell type="scriptdictionary">
+        <item key="sector_1_kind_path">
+        </item>
+      </tell>
+    </object>
+    <object name="Sector_6_Gate">
+      <inherit name="editor_object" />
+      <alias>Sector 6 Gate</alias>
+      <look><![CDATA[This gate looks really tough!<br/>It leads to "Sector 6", which is the final sector with the administration controls for Cosmos.]]></look>
+      <drop type="boolean">false</drop>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <inventoryverbs type="stringlist" />
+      <isroom type="boolean">false</isroom>
+      <attr name="feature_container" type="boolean">false</attr>
+      <isopen type="boolean">false</isopen>
+      <attr name="feature_startscript" type="boolean">false</attr>
+      <open />
+      <close type="boolean">false</close>
+      <visible />
+      <feature_usegive />
+      <scenery type="boolean">false</scenery>
+      <openscript type="script">
+        MakeExitVisible
+        MoveObject (player, Sector_2_Habitation_Homes)
+      </openscript>
+      <attr name="_initialise_" type="script">
+      </attr>
+    </object>
   </object>
   <object name="Sector_6_Administrative_Wing">
     <inherit name="editor_room" />
@@ -1018,6 +1210,9 @@
       <inherit name="editor_object" />
       <look>The Cosmos's direct master interface. The interface itself is damaged and right below it is the shutdown panel.</look>
       <alias>Interface</alias>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
     </object>
   </object>
 </asl>
