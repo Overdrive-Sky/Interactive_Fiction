@@ -25,7 +25,7 @@
     <showtitle />
     <appendobjectdescription type="boolean">false</appendobjectdescription>
     <enablehyperlinks />
-    <showpanes />
+    <showpanes type="boolean">false</showpanes>
     <showcommandbar />
     <showlocation />
     <classiclocation type="boolean">false</classiclocation>
@@ -63,24 +63,25 @@
       JS.setCss ("#gamePanel", "top:28px")
       JS.setCss ("#status", "background:rgb(6, 14, 25)")
       JS.setCss ("#status", "display:none")
+      JS.setCss ("#endWaitLink", "color:rgb(224, 255, 255)")
       msg ("No one really knows when the aberrations started to happen, or when the term came into fruition, but several have tried to get to bottom of it. No one has come forth with a reasonable explanation or course of action so far.<br/><br/>Since light-speed space travel is a fairly democratized affair, there really are no drawbacks to setting sale to nearby planetary systems and sight-seeing to one’s heart's content. Many have wandered aimlessly in hopes of finding some kind of truth that would recontextualize everything, while others built super-computers in order to retrieve anything and everything that could be useful from the surrounding data. <br/><br/>You are a simple maintenance worker for several of these super-computers, but for a while now, you have been having strange visions of a small celestial body in a neighbouring planetary system. Recklessly setting your makeshift craft’s trajectory to that of the supposed heavenly object, you end up crash landing on the small planet, and while you came out unscathed, the same could not be said for your trip companion. Stranded, but curious, you decide to delve further into the unknown.")
       wait {
         ClearScreen
         JS.setCss ("#status", "display:block")
         SetTimeout (2) {
-          msg ("Timmy: Hello! My name is Timmy, I’m a guide AI of the Cosmos: Cosmic Original Synthetic Maker Omni System. This system needs a check-up, thank you for arriving.")
+          msg ("Timmy: Hello! My name is Timmy, I’m an AI guide of the Cosmos: Cosmic Original Synthetic Maker Omni System. The system needs a check-up, thank you for arriving.")
         }
       }
-      JS.setCss ("#endWaitLink", "color:rgb(224, 255, 255)")
     ]]></start>
     <roomenter type="script">
     </roomenter>
+    <echohyperlinks type="boolean">false</echohyperlinks>
   </game>
   <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
     <inherit name="editor_room" />
     <isroom />
-    <description>The room is very empty, with the exception of strange fauna, a very shiny key and a very shiny door. They are so shiny in fact, that you can't look at them, making you question if they really exist in the first place.</description>
+    <description>Looking upon the surrounding environment, you find yourself lost amidst a sea of green, populated with all kinds of weird shapes and sizes of what can be deduced to be some kind of flora. Upon further inspection, the whole area seems to be enclosed by a dome, and despite you crash landing through it, there are no shards to speak of around where you landed, nor can you see your ship, now that you think about it. Being a dome, there must be an exit, and indeed a rusty gate can be seen in the distance if one would squint hard enough. </description>
     <picture>1-garden.gif</picture>
     <attr name="grid_width" type="int">1</attr>
     <attr name="grid_length" type="int">1</attr>
@@ -89,38 +90,10 @@
     <attr name="grid_label_colour">Coral</attr>
     <attr name="grid_border">DarkGoldenRod</attr>
     <alias>Sector 1: Garden Overworld</alias>
-    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <usedefaultprefix />
     <dropdestination type="object">Sector_1_Garden_Overword</dropdestination>
     <beforeenter type="script">
     </beforeenter>
-    <object name="passkey_sector_2">
-      <inherit name="editor_object" />
-      <look>A blue keycard with "Sector 2" written on it.</look>
-      <take />
-      <linkcolour>Crimson</linkcolour>
-      <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
-      <dropmsg>You felt the shininess leave you.</dropmsg>
-      <feature_usegive />
-      <use type="boolean">false</use>
-      <scenery />
-      <feature_wearable />
-      <alias>Blue KeyCard</alias>
-      <visible />
-      <usemenuprompt>Shiny Door</usemenuprompt>
-      <feature_switchable />
-      <ontake type="script">
-      </ontake>
-      <selfuseon type="scriptdictionary">
-        <item key="Sector_2_Gate">
-          if (Got(passkey_sector_2)) {
-            msg ("The key was used to open the door.")
-            MoveObject (player, Sector_2_Habitation_Homes)
-            msg ("You find yourself in Sector 2 as the AI follows you.")
-            MakeObjectInvisible (passkey_sector_2)
-          }
-        </item>
-      </selfuseon>
-    </object>
     <object name="Sector_2_Gate">
       <inherit name="editor_object" />
       <alias>Sector 2 Gate</alias>
@@ -133,7 +106,7 @@
       <isroom type="boolean">false</isroom>
       <attr name="feature_container" type="boolean">false</attr>
       <isopen type="boolean">false</isopen>
-      <feature_startscript />
+      <attr name="feature_startscript" type="boolean">false</attr>
       <open />
       <close type="boolean">false</close>
       <visible />
@@ -145,6 +118,10 @@
       </openscript>
       <attr name="_initialise_" type="script">
       </attr>
+      <alt type="stringlist">
+        <value>exit</value>
+        <value>door</value>
+      </alt>
     </object>
     <object name="ai_character">
       <inherit name="editor_object" />
@@ -152,7 +129,7 @@
       <gender>N/A</gender>
       <article>N/A</article>
       <possessive>N/A</possessive>
-      <look>The AI that commands Planet Cosmos, in the form a child. They seem very curious about me.</look>
+      <look>An AI being that resembles a human child. They seem very curious about you.</look>
       <attr name="feature_startscript" type="boolean">false</attr>
       <inventoryverbs type="stringlist">
         <value>Look at</value>
@@ -168,45 +145,47 @@
       <askdefault type="script">
       </askdefault>
       <speak type="script">
-        options = Split("Be Kind;Be Direct", ";")
-        ShowMenu ("Timmy: I have been watching the plants grow for a long time, but how do they work, are they following rules? ", options, false) {
-          switch (result) {
-            case (1) {
-              msg ("Be Kind")
+        if (ai_character.hasspoke = false) {
+          options = Split("Be Kind;Be Direct", ";")
+          ShowMenu ("Timmy: I have been watching the plants grow for a long time, but how do they work, are they following rules? ", options, false) {
+            switch (result) {
+              case (1) {
+                msg ("Be Kind")
+              }
+              case (2) {
+                msg ("Be Direct")
+              }
             }
-            case (2) {
-              msg ("Be Direct")
-            }
-          }
-          if (result = "Be Kind") {
-            msg ("Wanda: They follow the rules of nature, to grow, to flourish to then pollinate and then death. All plants follow this path, not exactly at the same time, however. We as humans follow this path… in similar way.")
-            SetTimeout (3) {
-              msg ("Timmy: People too? But plants are so different.  ")
+            if (result = "Be Kind") {
+              msg ("Wanda: They follow the rules of nature, to grow, to flourish to then pollinate and then die. All plants follow this path, not exactly at the same time, however. We as humans follow this path too… in similar way.")
               SetTimeout (3) {
-                msg ("Wanda: Of course, we are living beings, even if we extend our lives, we’ll still be humans under the will of nature. ")
+                msg ("Timmy: People too? But plants are so different.  ")
                 SetTimeout (3) {
-                  msg ("Timmy: Ah okay! ")
+                  msg ("Wanda: Of course, we are living beings, even if we extend our lives, we’ll still be humans under the will of nature. ")
                   SetTimeout (3) {
-                    msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!")
+                    msg ("Timmy: Ah okay! ")
+                    SetTimeout (3) {
+                      msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really pretty!")
+                    }
                   }
                 }
               }
             }
-          }
-          else if (result = "Be Direct") {
-            msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
-            SetTimeout (3) {
-              msg ("Timmy: That’s nature? ")
+            else if (result = "Be Direct") {
+              msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
               SetTimeout (3) {
-                msg ("Wanda: In a way… Survival of species and securing the future. ")
+                msg ("Timmy: That’s nature? ")
                 SetTimeout (3) {
-                  msg ("Timmy: Even for people? ")
+                  msg ("Wanda: In a way… Survival of species and securing the future. ")
                   SetTimeout (3) {
-                    msg ("Wanda: Yes. ")
+                    msg ("Timmy: Even for people? ")
                     SetTimeout (3) {
-                      msg ("Timmy: Okay, thank you. ")
+                      msg ("Wanda: Yes. ")
                       SetTimeout (3) {
-                        msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!")
+                        msg ("Timmy: Okay, thank you for sharing.")
+                        SetTimeout (3) {
+                          msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really pretty!")
+                        }
                       }
                     }
                   }
@@ -214,33 +193,19 @@
               }
             }
           }
-          else {
-            msg ("Wanda: Most likely photosynthesis, controlled by DNA in order to reproduce, to avoid death, extinction and oblivion like all lifeforms. ")
-            SetTimeout (3) {
-              msg ("Timmy: That’s nature? ")
-              SetTimeout (3) {
-                msg ("Wanda: In a way… Survival of species and securing the future. ")
-                SetTimeout (3) {
-                  msg ("Timmy: Even for people? ")
-                  SetTimeout (3) {
-                    msg ("Wanda: Yes. ")
-                    SetTimeout (3) {
-                      msg ("Timmy: Okay, thank you. ")
-                      SetTimeout (3) {
-                        msg ("Timmy: Have you seen that  {object:passkey_sector_2} over there? It is really glowing!\")")
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+          MakeObjectVisible (passkey_sector_2)
+          set (ai_character, "hasspoke", true)
         }
-        MakeObjectVisible (passkey_sector_2)
-        list remove (ai_character.displayverbs, "Speak to")
+        else {
+          msg ("It seems to be lost in thought.")
+        }
       </speak>
       <ask type="scriptdictionary" />
       <tell type="scriptdictionary" />
+      <alt type="stringlist">
+        <value>AI</value>
+      </alt>
+      <hasspoke type="boolean">false</hasspoke>
     </object>
     <object name="player">
       <inherit name="editor_object" />
@@ -263,6 +228,63 @@
         <item key="sector_1_kind_path">
         </item>
       </tell>
+    </object>
+    <object name="dome">
+      <inherit name="editor_object" />
+      <alias>dome</alias>
+      <scenery />
+      <look>Despite being transparent, it doesn't seem to be made out of glass. A sizable hole can be seen, and it is safe to assume that you are the one responsible for it, despite losing your senses during that brief period of time.</look>
+      <drop type="boolean">false</drop>
+    </object>
+    <object name="flora">
+      <inherit name="editor_object" />
+      <alias>flora</alias>
+      <alt type="stringlist">
+        <value>plants</value>
+        <value>greenery</value>
+        <value>vegetation</value>
+        <value>shapes</value>
+      </alt>
+      <scenery />
+      <look type="script">
+        msg ("From tall sprawling trees that intertwin in displays of impossible geometry, to small foliage that only seems to be half organic, the humid atmosphere that you breath appears to host all kinds of lifeforms. While rummaging through the dense vegetation, a clearly not organic object can be seen. It looks like a key of some sort. ")
+        MakeObjectVisible (passkey_sector_2)
+      </look>
+      <visible />
+      <feature_startscript />
+      <attr name="_initialise_" type="script">
+      </attr>
+      <drop type="boolean">false</drop>
+    </object>
+    <object name="passkey_sector_2">
+      <inherit name="editor_object" />
+      <look>A blue keycard with "Sector 2" written on it.</look>
+      <take />
+      <linkcolour>Crimson</linkcolour>
+      <feature_usegive />
+      <use type="boolean">false</use>
+      <scenery />
+      <attr name="feature_wearable" type="boolean">false</attr>
+      <alias>Blue KeyCard</alias>
+      <visible type="boolean">false</visible>
+      <usemenuprompt>Shiny Door</usemenuprompt>
+      <attr name="feature_switchable" type="boolean">false</attr>
+      <ontake type="script">
+      </ontake>
+      <selfuseon type="scriptdictionary">
+        <item key="Sector_2_Gate">
+          if (Got(passkey_sector_2)) {
+            msg ("The key was used to open the door.")
+            MoveObject (player, Sector_2_Habitation_Homes)
+            msg ("You find yourself in Sector 2 as the AI follows you.")
+            MakeObjectInvisible (passkey_sector_2)
+          }
+        </item>
+      </selfuseon>
+      <alt type="stringlist">
+        <value>key</value>
+        <value>card</value>
+      </alt>
     </object>
   </object>
   <object name="Sector_2_Habitation_Homes">
