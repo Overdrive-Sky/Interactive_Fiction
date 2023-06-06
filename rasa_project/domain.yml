@@ -1,86 +1,165 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - no_input
-  - scared
-  - surprised
-
+- affirm
+- are_you_happy
+- awesome
+- cosmo_purpose
+- crazy
+- deny
+- do_you_eat
+- example
+- food
+- goodbye
+- greet
+- happy_examples
+- job
+- job_specifics
+- mood_great
+- mood_unhappy
+- no_input
+- present
+- tell_me_a_joke
+- what_do_you_do
+- what_is_cosmo
+- who_are_you
+- who_is_wanda
+- scared
+- surprised
+- tell_me_a_story
 responses:
-
+  utter_tell_story: 
+  - text: "Well, in the beggining there Timmy and mother Wanda. Mother made younger brother Cosmo and said 'Timmy, you need to take care of your brother now'. Timmy didn't want to take care of him. But after mother went missing, Timmy feels like that is what he has to do. So now I help everybody and take care of Cosmo"
+  - text: "A story? Once upon a time there was a green creature living in a swamp. He lived peacefully until other creatures including a mule decided to invade his swamp. The green one then embarked on a quest to retake his swamp. Ended up marrying a noble woman. Crazy right?"
+  - text: "Yeah I can tell a story. A rodent and feline spend their daily lives after each other. Eventually they understand that they have more in common that they thought. They reached an agreement and spent the rest of their days playing together. Isn't that great? I wish I could play all day long"
   utter_scared:
   - text: "No need to be scared! I'm just Timmy, friendly AI to help everyone!"
   - text: "Oh, sorry... Timmy don't want that. Timmy just wants to help"
   - text: "Scared? Why? I'm Timmy the friendly AI that helps everybody"
-
   utter_scared_following:
   - text: "I already told you! Don't be scared! I'm just Timmy, friendly AI to help everyone!"
   - text: "Again? Sorry. Timmy don't want that. Timmy just wants to help"
   - text: "Again? Why? I'm Timmy the friendly AI that helps everybody"
-
   utter_surprised:
   - text: "Did I surprise you? Uau, Timmy is good at surprising!"
   - text: "Timmy also surprises himself sometimes"
   - text: "Surprised? Why? How? It is just Timmy, the friendly AI"
-
   utter_surprised_following:
   - text: "Again? Did I surprise you? Timmy is good at surprising!"
   - text: "But Timmy is right here! No need to be surprised again"
   - text: "Getting surprised again? How? Timmy is here since the beggining"
-
+  utter_nothing:
+  - text: ''
   utter_greet:
-  - text: "Hey there maintence person! How are you?"
-
+  - text: Hey! How are you?
   utter_cheer_up:
-  - text: "Would you like some virtual chocolate to cheer you up?"
-
+  - text: That's alright. Don't Worry
   utter_did_that_help:
-  - text: "Did Timmy help?"
-
+  - text: Did that help you?
   utter_happy:
-  - text: "Urray!"
-
+  - text: That's Great!
+  - text: fantastic
+  - text: awesome
+  utter_sad:
+  - text: That's ok. Timmy doesn't know what being sad is
   utter_goodbye:
-  - text: "Do you really have to go?"
-  - text: "See you soon maintenance guy"
-
+  - text: Bye
   utter_iamabot:
-  - text: "I am just Timmy! Your fairly odd AI assistant"
-
-  utter_default:
-    - text: I'm sorry, Timmy didn't understand that. Could you rephrase it?
-    - text: "Ugh... what?"
-    - text: "Timmy is confused..."
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
-
+  - text: I am Timmy. The friendly AI.
+  utter_who_are_you:
+  - text: Who are you?
+  utter_what_do_you_do:
+  - text: So what do you do {name}?
+  utter_job_specifics:
+  - text: Really? What does a {job} usually do?
+  utter_what_do_i_do:
+  - text: I help everybody on their path to be happy!
+  utter_example_job:
+  - text: Oh you know, to make sure Cosmo is always up and running!
+  utter_what_is_cosmo:
+  - text: Cosmo is the computer that Wanda made.
+  utter_cosmo_purpose:
+  - text: Cosmo runs a simutated world where every human being can be happy. If Cosmo stoped functioning, everybody would vanish!
+  utter_who_is_wanda:
+  - text: Wanda is my creator. She's the most brilliant scientist ever. She created me, Cosmo and made sure everybody is happy forever! She's awesome!
+  utter_wanda_is_good:
+  - text: No, she's good. She is the best. I know it!
+  utter_wanda_is_awesome:
+  - text: I know right. She is indeed fantastic
+  utter_what_is_happy:
+  - text: Timmy doesn't know what happiness is. Only knows that humans are happy. What is happiness? Can you give me an example?
+  utter_happy_examples:
+  - text: Oh, so that's the kind of thing. Will you help Timmy be happy?
+  utter_do_i_eat:
+  - text: Timmy doesn't process human food. Timmy is powered by energy and people's dreams.
+  utter_what_do_you_eat:
+  - text: What do you eat?
+  utter_is_that_your_favorite_food:
+  - text: Is that your favorite food?
+  utter_what_is_your_favorite_food:
+  - text: Then what is your favorite food?
+  utter_feed_it_to_me:
+  - text: Great! Maybe will put some {favorite_food} in its circuits to try to taste it!
+  utter_joke_setup:
+  - text: 'Ok here is a joke: {joke_setup}'
+  utter_ready_for_puchline:
+  - text: Ready for the punchline?
+  utter_joke_punchline:
+  - text: '{joke_punchline}'
+  utter_do_you_like_it:
+  - text: Do you like it?
+  utter_delete_joke:
+  - text: Too bad. I'll delete the joke from my database then
 entities:
-  - name 
-
+- name
+- job
+- favorite_food
 slots:
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: name
+  job:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: job
+  favorite_food:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: favorite_food
+  joke_punchline:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+  joke_setup:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
   previously_scared:
     type: bool
     influence_conversation: true
-    initial_value: False
+    initial_value: false
     mappings:
-      - type: custom
+    - type: custom
   previously_surprised:
     type: bool
     influence_conversation: true
-    initial_value: False
+    initial_value: false
     mappings:
-      - type: custom
-
-
+    - type: custom
 actions:
-  - set_already_scared
-  - set_already_surprised
-#   - action_session_start
+- utter_nothing
+- joke_request
+- set_already_scared
+- set_already_surprised
+- action_session_start
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

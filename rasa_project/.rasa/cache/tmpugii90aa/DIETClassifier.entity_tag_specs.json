@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-favorite_food",
+      "2": "I-favorite_food",
+      "3": "L-favorite_food",
+      "4": "U-favorite_food",
+      "5": "B-job",
+      "6": "I-job",
+      "7": "L-job",
+      "8": "U-job",
+      "9": "B-name",
+      "10": "I-name",
+      "11": "L-name",
+      "12": "U-name",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-favorite_food": 1,
+      "I-favorite_food": 2,
+      "L-favorite_food": 3,
+      "U-favorite_food": 4,
+      "B-job": 5,
+      "I-job": 6,
+      "L-job": 7,
+      "U-job": 8,
+      "B-name": 9,
+      "I-name": 10,
+      "L-name": 11,
+      "U-name": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

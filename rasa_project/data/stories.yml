@@ -2,6 +2,123 @@ version: "3.1"
 
 stories:
 
+- story: first meet
+  steps:
+  - intent: greet
+  - action: utter_who_are_you
+  - intent: present
+  - action: utter_what_do_you_do
+  - intent: job
+  - action: utter_job_specifics
+  - intent: job_specifics
+  - action: utter_happy
+
+- story: whos timmy
+  steps:
+  - intent: who_are_you
+  - action: utter_iamabot
+  - intent: what_do_you_do
+  - action: utter_what_do_i_do
+  - intent: example
+  - action: utter_example_job
+
+- story: what is cosmo, sad 
+  steps:
+  - intent: what_is_cosmo
+  - action: utter_what_is_cosmo
+  - intent: cosmo_purpose
+  - action: utter_cosmo_purpose
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+
+- story: whats cosmo, happy ending
+  steps:
+  - intent: what_is_cosmo
+  - action: utter_what_is_cosmo
+  - intent: cosmo_purpose
+  - action: utter_cosmo_purpose
+  - intent: mood_great
+  - action: utter_happy
+
+- story: who is wanda, sad ending
+  steps:
+  - intent: who_is_wanda
+  - action: utter_who_is_wanda
+  - intent: crazy
+  - action: utter_wanda_is_good
+
+- story: who is wanda, happy ending
+  steps:
+  - intent: who_is_wanda
+  - action: utter_who_is_wanda
+  - intent: awesome
+  - action: utter_wanda_is_awesome
+
+- story: are you happy? happy ending
+  steps:
+  - intent: are_you_happy
+  - action: utter_what_is_happy
+  - intent: happy_examples
+  - action: utter_happy_examples
+  - intent: affirm
+  - action: utter_happy
+
+- story: are you happy? bad ending
+  steps:
+  - intent: are_you_happy
+  - action: utter_what_is_happy
+  - intent: happy_examples
+  - action: utter_happy_examples
+  - intent: deny
+  - action: utter_sad
+
+- story: do you eat happy ending
+  steps: 
+  - intent: do_you_eat
+  - action: utter_do_i_eat
+  - action: utter_what_do_you_eat
+  - intent: food
+  - action: utter_is_that_your_favorite_food
+  - intent: affirm
+  - action: utter_feed_it_to_me
+
+- story: do you eat happy ending
+  steps: 
+  - intent: do_you_eat
+  - action: utter_do_i_eat
+  - action: utter_what_do_you_eat
+  - intent: food
+  - action: utter_is_that_your_favorite_food
+  - intent: deny
+  - action: utter_what_is_your_favorite_food
+  - intent: food
+  - action: utter_feed_it_to_me
+
+- story: joke happy ending
+  steps:
+  - intent: tell_me_a_joke
+  - action: joke_request
+  - action: utter_joke_setup
+  - action: utter_ready_for_puchline
+  - intent: affirm
+  - action: utter_joke_punchline
+  - action: utter_do_you_like_it
+  - intent: affirm
+  - action: utter_happy
+
+- story: joke sad ending
+  steps:
+  - intent: tell_me_a_joke
+  - action: joke_request
+  - action: utter_joke_setup
+  - action: utter_ready_for_puchline
+  - intent: affirm
+  - action: utter_joke_punchline
+  - action: utter_do_you_like_it
+  - intent: deny
+  - action: utter_delete_joke
+
+
 - story: startled_first
   steps:
     - intent: scared
@@ -34,13 +151,30 @@ stories:
       - previously_surprised: true
     - action: utter_surprised_following
 
+- story: tell story
+  steps:
+    - intent: tell_me_a_story
+    - action: utter_tell_story
 
-# - story: presenting
+- story: interactive_story_1
+  steps:
+  - intent: affirm
+  - action: utter_nothing
+
+# - story: interactive_story_1
 #   steps:
-#   - intent: greet
-#   - action: utter_greet
-  
+#   - intent: no_input
+#   - action: utter_nothing
 
+- story: interactive_story_2
+  steps:
+  - intent: nlu_fallback
+  - action: utter_nothing
+
+# - story: interactive_story_1
+#   steps:
+#   - intent: deny
+#   - action: utter_nothing
 
 # - story: happy path
 #   steps:
@@ -68,3 +202,8 @@ stories:
 #   - action: utter_did_that_help
 #   - intent: deny
 #   - action: utter_goodbye
+
+# - story: interactive_story_1
+#   steps:
+#   - intent: nlu_fallback
+#   - intent: no_input
