@@ -14,3 +14,7 @@ INSTRUCTIONS:
 -GO is the command to move throughout the world. Can be used with other keywords such as IN/OUT/NORTH/SOUTH/EAST/WEST, or you can use the keywords by themselves. Cardinal directions can be abbreviated to the initials, such as N/S/E/W.
 
 -USE is the command to… use objects of course. This verb can be paired with a name, or can be used to link two objects by typing “USE [object] on [object]”.
+
+-Throughout the game, you will be accompanied by a companion that can offer several useful information. To talk to NPCs, you can use the command TALK/SPEAK TO, as in “SPEAK to [character]”, for example.
+
+-Other verbs can be used as commands to interact with the world, but it will be obvious when something other than USE or GET is required to progress.
