@@ -59,6 +59,10 @@
     <attr name="command_newline" type="boolean">false</attr>
     <echohyperlinks type="boolean">false</echohyperlinks>
     <autodescription_youarein_useprefix />
+    <underlinehyperlinks type="boolean">false</underlinehyperlinks>
+    <autodescription_youarein_newline />
+    <autodescription_youcansee_newline />
+    <autodescription_description_newline />
     <pov type="object">player</pov>
     <start type="script"><![CDATA[
       JS.setCss ("#gamePanel", "background:transparent")
@@ -78,10 +82,6 @@
     ]]></start>
     <roomenter type="script">
     </roomenter>
-    <underlinehyperlinks type="boolean">false</underlinehyperlinks>
-    <autodescription_youarein_newline />
-    <autodescription_youcansee_newline />
-    <autodescription_description_newline />
   </game>
   <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
@@ -122,6 +122,7 @@
         <value>exit</value>
         <value>door</value>
       </alt>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
       <openscript type="script">
         MakeExitVisible
         MoveObject (player, Sector_2_Habitation_Homes)
@@ -150,6 +151,7 @@
         <value>AI</value>
       </alt>
       <hasspoke type="boolean">false</hasspoke>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
       <attr name="_initialise_" type="script">
       </attr>
       <askdefault type="script">
@@ -230,6 +232,7 @@
         <value>Look at</value>
       </displayverbs>
       <drop type="boolean">false</drop>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
       <tell type="scriptdictionary">
         <item key="sector_1_kind_path">
         </item>
@@ -434,6 +437,7 @@
       </displayverbs>
       <drop type="boolean">false</drop>
       <take type="boolean">false</take>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
       <attr name="_initialise_" type="script">
       </attr>
       <askdefault type="script">
@@ -902,7 +906,7 @@
               }
             }
             if (result = "Be Kind") {
-              msg ("Wanda: Yes, I know, but still… everything has to end. That finality is what gives purpose to Life.")
+              msg ("Wanda: Everything has to end. That finality is what gives purpose to Life.")
               SetTimeout (3) {
                 msg ("Timmy: With Cosmos people will re-live their lives. Does that make life meaningless?")
                 SetTimeout (3) {
