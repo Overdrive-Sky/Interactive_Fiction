@@ -968,6 +968,7 @@
     </object>
     <object name="terminal">
       <inherit name="editor_object" />
+      <inherit name="container_open" />
       <look>Administrative Wing access terminal, it can only be accessed with a admin activation code.</look>
       <alias>Terminal</alias>
       <drop type="boolean">false</drop>
@@ -975,6 +976,13 @@
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
+      <linkcolour>Crimson</linkcolour>
+      <scenery type="boolean">false</scenery>
+      <feature_container />
+      <open />
+      <close type="boolean">false</close>
+      <isopen type="boolean">false</isopen>
+      <openmsg>ACTIVATION :: SUCESS</openmsg>
       <object name="passkey_sector_6">
         <inherit name="editor_object" />
         <look>A red keycard with "Sector 6" written on it.</look>
@@ -1027,6 +1035,7 @@
         <selfuseon type="scriptdictionary">
           <item key="terminal">
             if (game.pov.parent = Sector_5_Engine_Works) {
+              HelperOpenObject (terminal)
               msg ("Wanda: The activation code worked!")
               msg ("Wanda: It unlocked a drawer with the {object:passkey_sector_6} inside!")
               list remove (activation_code.displayverbs, "Use")
