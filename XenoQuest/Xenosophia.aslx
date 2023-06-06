@@ -24,7 +24,7 @@
     <bordercolour>BlanchedAlmond</bordercolour>
     <showtitle />
     <appendobjectdescription type="boolean">false</appendobjectdescription>
-    <enablehyperlinks />
+    <enablehyperlinks type="boolean">false</enablehyperlinks>
     <showpanes type="boolean">false</showpanes>
     <showcommandbar />
     <showlocation />
@@ -47,7 +47,7 @@
     <custompaddingright type="int">20</custompaddingright>
     <customlocationtextcolour>GoldenRod</customlocationtextcolour>
     <attr name="feature_asktell" type="boolean">false</attr>
-    <defaultlinkforeground>Crimson</defaultlinkforeground>
+    <defaultlinkforeground>SteelBlue</defaultlinkforeground>
     <turnoffcompass />
     <turnoffplacesandobjects />
     <statusandcompassattop type="boolean">false</statusandcompassattop>
@@ -58,6 +58,7 @@
     <commandpane type="boolean">false</commandpane>
     <attr name="command_newline" type="boolean">false</attr>
     <echohyperlinks type="boolean">false</echohyperlinks>
+    <autodescription_youarein_useprefix />
     <pov type="object">player</pov>
     <start type="script"><![CDATA[
       JS.setCss ("#gamePanel", "background:transparent")
@@ -77,7 +78,10 @@
     ]]></start>
     <roomenter type="script">
     </roomenter>
-    <autodescription_youarein_useprefix />
+    <underlinehyperlinks type="boolean">false</underlinehyperlinks>
+    <autodescription_youarein_newline />
+    <autodescription_youcansee_newline />
+    <autodescription_description_newline />
   </game>
   <object name="Sector_1_Garden_Overword">
     <inherit name="gridborder_path_ns" />
@@ -275,6 +279,8 @@
         <value>key</value>
         <value>card</value>
       </alt>
+      <takemsg>You picked the Blue KeyCard. It says "Sector 2".</takemsg>
+      <dropmsg>You dropped Blue KeyCard. </dropmsg>
       <ontake type="script">
       </ontake>
       <selfuseon type="scriptdictionary">
@@ -287,8 +293,6 @@
           }
         </item>
       </selfuseon>
-      <takemsg>You picked the Blue KeyCard. It says "Sector 2".</takemsg>
-      <dropmsg>You dropped Blue KeyCard. </dropmsg>
     </object>
   </object>
   <object name="Sector_2_Habitation_Homes">
