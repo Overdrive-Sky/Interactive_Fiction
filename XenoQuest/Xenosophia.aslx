@@ -124,7 +124,7 @@
     <object name="Sector_2_Gate">
       <inherit name="editor_object" />
       <alias>Sector 2 Gate</alias>
-      <look><![CDATA[A old rusted door that appears to be functioning.<br/>"Sector 2" is written on it. ]]></look>
+      <look><![CDATA[A old rusted gate that appears to be functioning.<br/>"Sector 2" is written on it. ]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
         <value>Look at</value>
@@ -270,6 +270,7 @@
       </onexit>
       <exit alias="out" to="Sector_2_Habitation_Homes">
         <inherit name="outdirection" />
+        <suffix>to Sector 2</suffix>
       </exit>
       <object name="family_photo">
         <inherit name="editor_object" />
@@ -470,7 +471,7 @@
     <object name="Sector_3_Gate">
       <inherit name="editor_object" />
       <alias>Sector  3 Gate</alias>
-      <look><![CDATA[A very old door that still seems functional.<br/>It must lead to Sector 3.]]></look>
+      <look><![CDATA[A very old gate that still seems functional.<br/>It must lead to Sector 3.]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
         <value>Look at</value>
@@ -496,6 +497,7 @@
       <inherit name="indirection" />
       <locked type="boolean">false</locked>
       <visible type="boolean">false</visible>
+      <suffix>the Abandoned House</suffix>
     </exit>
   </object>
   <object name="Sector_3_Bio_life_Laboratories">
@@ -549,6 +551,33 @@
         <dropmsg>You dropped a card with admin access.</dropmsg>
         <selfuseon type="scriptdictionary">
           <item key="computer">
+            options = Split("ACTIVATE;EXIT",";")
+            if (game.pov.parent = Sector_4_Heat_Cooler_Blocks) {
+              if (Got(admin_card)) {
+                ShowMenu ("COOLING SYSTEM IS CURRENTLY INACTIVE", options, false) {
+                  switch (result) {
+                    case (1) {
+                      msg ("ACTIVATE")
+                    }
+                    case (2) {
+                      msg ("EXIT")
+                    }
+                  }
+                  if (result = "ACTIVATE") {
+                    msg ("COOLING SYSTEM IS NOW ACTIVE")
+                    MakeObjectVisible (control_room)
+                    UnlockExit (Control Room Entrance)
+                    list remove (admin_card.displayverbs, "Use")
+                    SetTimeout (1) {
+                      msg ("HEAT PROTECTION OFFLINE :: YOU CAN NOW ACCESS THE {object:control_room}")
+                    }
+                  }
+                  else {
+                    msg ("EXITING...")
+                  }
+                }
+              }
+            }
           </item>
         </selfuseon>
       </object>
@@ -576,7 +605,7 @@
                 if (Got(passkey_sector_4)) {
                   msg ("The key was used to open the old door.")
                   MoveObject (player, Sector_4_Heat_Cooler_Blocks)
-                  msg ("You find yourself in Sector 3 as Timmy continues to follow you.")
+                  msg ("You find yourself in Sector 4 as Timmy continues to follow you.")
                   MakeObjectInvisible (passkey_sector_4)
                 }
               }
@@ -623,7 +652,7 @@
           if (result = "Be Kind") {
             msg ("Wanda: That is a heavy question… We don’t know what lies beyond so we try to extend as much as we can, make the most of it… until the time comes.")
             SetTimeout (3) {
-              msg ("Timmy: Is that the “meaning”?")
+              msg ("Timmy: Is that the “meaning” ?")
               SetTimeout (3) {
                 msg ("Wanda: Everyone can have their own “meaning”, maybe finding it for themselves is the meaning itself.")
                 SetTimeout (3) {
@@ -683,28 +712,10 @@
       <ask type="scriptdictionary" />
       <tell type="scriptdictionary" />
     </object>
-    <object name="player">
-      <inherit name="editor_object" />
-      <inherit name="editor_player" />
-      <gender>N/A</gender>
-      <possessive>their</possessive>
-      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
-      <alias>Wanda</alias>
-      <take />
-      <feature_usegive />
-      <use type="boolean">false</use>
-      <attr name="pov_look">Looking good.</attr>
-      <isroom type="boolean">false</isroom>
-      <speak type="string"></speak>
-      <tell type="scriptdictionary">
-        <item key="sector_1_kind_path">
-        </item>
-      </tell>
-    </object>
     <object name="Sector_4_Gate">
       <inherit name="editor_object" />
       <alias>Sector 4 Gate</alias>
-      <look><![CDATA[A very big steel door. <br/>It mentions "Sector 5".]]></look>
+      <look><![CDATA[A very big steel gate. <br/>It mentions "Sector 5".]]></look>
       <drop type="boolean">false</drop>
       <displayverbs type="stringlist">
         <value>Look at</value>
@@ -733,35 +744,226 @@
     <alias>Sector 4: Heat-Cooler Blocks</alias>
     <picture>4-cooler.gif</picture>
     <description>The Cosmos's internal cooling systems, the upper blocks are uncomfortably cold while the lower ones are annoyingly hot. The coolling system itself sits on the center of the room alongside a computer. An additional control room, near the corner, is unacessible to do the heat.</description>
-    <exit alias="west" to="Sector_5_Engine_Works">
-      <inherit name="westdirection" />
-    </exit>
-    <exit alias="east" to="Sector_2_Habitation_Homes">
-      <inherit name="eastdirection" />
-    </exit>
+    <beforefirstenter type="script">
+      MakeObjectInvisible (control_room)
+    </beforefirstenter>
     <object name="cooling_system">
       <inherit name="editor_object" />
-      <alias>Coolling System</alias>
+      <alias>Cooling System</alias>
       <look>The main core of cooling system glows in the the center of the room, within it are strange liquids that fluctuate through tubes.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
     </object>
     <object name="computer">
       <inherit name="editor_object" />
       <alias>Computer</alias>
-      <look>The screen says "Cosmos cooling system direct interface".</look>
+      <look><![CDATA[The screen says "Cosmos cooling system direct interface".<br/>It needs a Card to be able to use it once.]]></look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <feature_usegive />
+      <use type="script">
+        if () {
+          SetObjectFlagOn (, "")
+        }
+        msg ("")
+      </use>
+      <drop type="boolean">false</drop>
     </object>
     <object name="control_room">
       <inherit name="editor_room" />
       <description>The room appears to the main controls for the cooling systems. </description>
+      <alias>Control Room</alias>
+      <object name="big_monitor">
+        <inherit name="editor_object" />
+        <alias>Big Monitor</alias>
+        <look><![CDATA[There are so many monitors in this room! Everything in this planet, every system is monitored through here.<br/>This is actually incredible!]]></look>
+        <displayverbs type="stringlist">
+          <value>Look at</value>
+        </displayverbs>
+      </object>
       <object name="passkey_sector_5">
         <inherit name="editor_object" />
+        <look>Very shiny key is the most appropriate description.</look>
+        <take />
+        <linkcolour>Crimson</linkcolour>
+        <takemsg>You picked the shiny key and feel the shininess inside.</takemsg>
+        <dropmsg>You felt the shininess leave you.</dropmsg>
+        <feature_usegive />
+        <use type="boolean">false</use>
+        <scenery />
+        <feature_wearable />
         <alias>Orange KeyCard</alias>
+        <visible type="boolean">false</visible>
+        <usemenuprompt>Shiny Door</usemenuprompt>
+        <feature_switchable />
+        <ontake type="script">
+        </ontake>
+        <selfuseon type="scriptdictionary">
+          <item key="Sector_5_Gate">
+            if (game.pov.parent = Sector_4_Heat_Cooler_Blocks) {
+              if (Got(passkey_sector_5)) {
+                msg ("The key was used to open the old door.")
+                MoveObject (player, Sector_5_Engine_Works)
+                msg ("You find yourself in Sector 5 as Timmy continues to follow you.")
+                MakeObjectInvisible (passkey_sector_5)
+              }
+            }
+          </item>
+        </selfuseon>
       </object>
       <exit alias="out" to="Sector_4_Heat_Cooler_Blocks">
         <inherit name="outdirection" />
+        <suffix>to Sector 4</suffix>
       </exit>
+      <object name="ai_character_in_sector_4">
+        <inherit name="editor_object" />
+        <alias>Timmy</alias>
+        <gender>N/A</gender>
+        <article>N/A</article>
+        <possessive>N/A</possessive>
+        <look>The AI that commands Planet Cosmos. They seem very curious about me.</look>
+        <attr name="feature_startscript" type="boolean">false</attr>
+        <inventoryverbs type="stringlist">
+          <value>Look at</value>
+        </inventoryverbs>
+        <displayverbs type="stringlist">
+          <value>Look at</value>
+          <value>Speak to</value>
+        </displayverbs>
+        <drop type="boolean">false</drop>
+        <take type="boolean">false</take>
+        <attr name="_initialise_" type="script">
+        </attr>
+        <askdefault type="script">
+        </askdefault>
+        <speak type="script">
+          options = Split("Be Kind;Be Direct", ";")
+          ShowMenu ("Timmy: You spoke about death, but the Cosmos’s simulation is repeating, it doesn’t truly end it just resets.", options, false) {
+            switch (result) {
+              case (1) {
+                msg ("Be Kind")
+              }
+              case (2) {
+                msg ("Be Direct")
+              }
+            }
+            if (result = "Be Kind") {
+              msg ("Wanda: Yes, I know, but still… everything has to end. That finality is what gives purpose to Life.")
+              SetTimeout (3) {
+                msg ("Timmy: With Cosmos people will re-live their lives. Does that make life meaningless?")
+                SetTimeout (3) {
+                  msg ("Wanda: The same path over and over… Life is about its unpredictability, it can be scary but that's what makes it exciting.")
+                  SetTimeout (3) {
+                    msg ("Timmy: I see…")
+                    SetTimeout (3) {
+                      MakeObjectVisible (passkey_sector_5)
+                      msg ("Timmy: Oh, there's the {object:passkey_sector_5} for Sector 5... Shall we go?")
+                    }
+                  }
+                }
+              }
+            }
+            else if (result = "Be Direct") {
+              msg ("Wanda: To circumvent death, the future is repeated and predestined… that is the purpose of Cosmos?")
+              SetTimeout (3) {
+                msg ("Timmy: Yes.")
+                SetTimeout (3) {
+                  msg ("Wanda: So, our choices aren’t even our own?")
+                  SetTimeout (3) {
+                    msg ("Timmy: Is that important?")
+                    SetTimeout (3) {
+                      msg ("Wanda: Being unable to change, forcing fate... that’s not a good thing.")
+                      SetTimeout (3) {
+                        msg ("Timmy: … ")
+                        SetTimeout (3) {
+                          MakeObjectVisible (passkey_sector_5)
+                          msg ("Timmy: Oh...there's the {object:broken_tube} for Sector 5...")
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            else {
+              msg ("Wanda: To circumvent death, the future is repeated and predestined… that is the purpose of Cosmos?")
+              SetTimeout (3) {
+                msg ("Timmy: Yes.")
+                SetTimeout (3) {
+                  msg ("Wanda: So, our choices aren’t even our own?")
+                  SetTimeout (3) {
+                    msg ("Timmy: Is that important?")
+                    SetTimeout (3) {
+                      msg ("Wanda: Being unable to change, forcing fate... that’s not a good thing.")
+                      SetTimeout (3) {
+                        msg ("Timmy: … ")
+                        SetTimeout (3) {
+                          msg ("Timmy: Oh...there's the {object:broken_tube} for Sector 5...")
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          list remove (ai_character_in_sector_4.displayverbs, "Speak to")
+        </speak>
+        <ask type="scriptdictionary" />
+        <tell type="scriptdictionary" />
+      </object>
     </object>
-    <exit alias="in" to="control_room">
+    <object name="Sector_5_Gate">
+      <inherit name="editor_object" />
+      <alias>Sector 5 Gate</alias>
+      <look><![CDATA[This gate seems to be reinforced in comparison with the others.<br/>It leads to "Sector 6", which is the sector were the engines are running.]]></look>
+      <drop type="boolean">false</drop>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <inventoryverbs type="stringlist" />
+      <isroom type="boolean">false</isroom>
+      <attr name="feature_container" type="boolean">false</attr>
+      <isopen type="boolean">false</isopen>
+      <attr name="feature_startscript" type="boolean">false</attr>
+      <open />
+      <close type="boolean">false</close>
+      <visible />
+      <feature_usegive />
+      <scenery type="boolean">false</scenery>
+      <openscript type="script">
+        MakeExitVisible
+        MoveObject (player, Sector_2_Habitation_Homes)
+      </openscript>
+      <attr name="_initialise_" type="script">
+      </attr>
+    </object>
+    <object name="player">
+      <inherit name="editor_object" />
+      <inherit name="editor_player" />
+      <gender>N/A</gender>
+      <possessive>their</possessive>
+      <look>Wanda is an “average joe” who has above average intelligence and technical abilities, adequate for maintenance work on an advanced supercomputer. Their a very stubborn person, filled with tenacity. Unlike previous workers, their more introspective, sentimental, and patient but also dislikes wasting their time, so they prefer working quickly. Additionately, they barely speak and doesn’t usually start conversations, it only answers.</look>
+      <alias>Wanda</alias>
+      <take />
+      <feature_usegive />
+      <use type="boolean">false</use>
+      <attr name="pov_look">Looking good.</attr>
+      <isroom type="boolean">false</isroom>
+      <speak type="string"></speak>
+      <tell type="scriptdictionary">
+        <item key="sector_1_kind_path">
+        </item>
+      </tell>
+    </object>
+    <exit name="Control Room Entrance" alias="in" to="control_room">
       <inherit name="indirection" />
+      <visible />
+      <locked />
+      <lockmessage>The Control Room is currently locked due to Heat Protection system being active.</lockmessage>
+      <suffix>the Control Room</suffix>
     </exit>
   </object>
   <object name="Sector_5_Engine_Works">
