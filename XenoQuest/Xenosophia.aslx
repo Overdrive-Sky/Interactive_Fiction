@@ -542,13 +542,13 @@
       <visible />
       <feature_usegive />
       <scenery type="boolean">false</scenery>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
       <openscript type="script">
         MakeExitVisible
         MoveObject (player, Sector_2_Habitation_Homes)
       </openscript>
       <attr name="_initialise_" type="script">
       </attr>
-      <usedefaultprefix type="boolean">false</usedefaultprefix>
     </object>
     <exit name="Broken Door" alias="in" to="interesting_house">
       <inherit name="indirection" />
@@ -589,6 +589,9 @@
       <hidechildren />
       <listchildren type="boolean">false</listchildren>
       <close type="boolean">false</close>
+      <open type="boolean">false</open>
+      <scenery />
+      <alias>Broken Tube</alias>
       <look type="script">
         if (Got(admin_card) and Got(passkey_sector_4)) {
           msg ("Amidst all the tubes, this one is broken.")
@@ -606,9 +609,6 @@
           msg ("Oh! There's a {object:admin_card} and a {object:passkey_sector_4} inside it!")
         }
       </look>
-      <open type="boolean">false</open>
-      <scenery />
-      <alias>Broken Tube</alias>
       <object name="admin_card">
         <inherit name="editor_object" />
         <displayverbs type="stringlist">
@@ -908,6 +908,7 @@
         </displayverbs>
         <drop type="boolean">false</drop>
         <take type="boolean">false</take>
+        <usedefaultprefix type="boolean">false</usedefaultprefix>
         <attr name="_initialise_" type="script">
         </attr>
         <askdefault type="script">
@@ -987,7 +988,6 @@
         </speak>
         <ask type="scriptdictionary" />
         <tell type="scriptdictionary" />
-        <usedefaultprefix type="boolean">false</usedefaultprefix>
       </object>
     </object>
     <object name="Sector_5_Gate">
@@ -1008,13 +1008,13 @@
       <visible />
       <feature_usegive />
       <scenery type="boolean">false</scenery>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
       <openscript type="script">
         MakeExitVisible
         MoveObject (player, Sector_2_Habitation_Homes)
       </openscript>
       <attr name="_initialise_" type="script">
       </attr>
-      <usedefaultprefix type="boolean">false</usedefaultprefix>
     </object>
     <exit name="Control Room Entrance" alias="in" to="control_room">
       <inherit name="indirection" />
@@ -1092,7 +1092,14 @@
     </object>
     <object name="engine_warehouse">
       <inherit name="editor_room" />
-      <description>Inside the warehouse are many tools of large sizes, none of which you can pick up. You look down a notice a {object:activation_code}.</description>
+      <description type="script">
+        if (Got(activation_code)) {
+          msg ("Inside the warehouse are many tools of large sizes, none of which you can pick up. ")
+        }
+        else {
+          msg ("Inside the warehouse are many tools of large sizes, none of which you can pick up. You look down a notice a {object:activation_code}.")
+        }
+      </description>
       <alias>Warehouse</alias>
       <usedefaultprefix />
       <object name="activation_code">
@@ -1356,13 +1363,13 @@
       </displayverbs>
       <drop type="boolean">false</drop>
       <take type="boolean">false</take>
+      <speak>It's time...let's repair the Interface.</speak>
       <attr name="_initialise_" type="script">
       </attr>
       <askdefault type="script">
       </askdefault>
       <ask type="scriptdictionary" />
       <tell type="scriptdictionary" />
-      <speak>It's time...let's repair the Interface.</speak>
     </object>
   </object>
   <verb>
