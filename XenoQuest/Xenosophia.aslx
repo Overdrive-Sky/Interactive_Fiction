@@ -1265,7 +1265,7 @@
     <inherit name="editor_room" />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Sector 6: Administrative Wing</alias>
-    <description><![CDATA[The Cosmos’s master control room. The place where the core of Cosmos is stored, filled with monitors that display every aspect of the planet.<br/>Besides the core is the the control interface]]></description>
+    <description><![CDATA[The Cosmos’s master control room. The place where the core of Cosmos is stored, filled with monitors that display every aspect of the planet.<br/>Besides the core is the the control interface.]]></description>
     <picture>6-core.gif</picture>
     <object name="control_interface">
       <inherit name="editor_object" />
