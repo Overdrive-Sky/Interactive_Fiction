@@ -18,3 +18,14 @@ INSTRUCTIONS:
 -Throughout the game, you will be accompanied by a companion that can offer several useful information. To talk to NPCs, you can use the command TALK/SPEAK TO, as in “SPEAK to [character]”, for example.
 
 -Other verbs can be used as commands to interact with the world, but it will be obvious when something other than USE or GET is required to progress.
+
+
+CREDITS:
+Luis Chaves
+Nuno Neto
+Pedro Costa
+Tiago Rebelo
+
+Sector artwork generated using AI.
+Background music - https://www.youtube.com/watch?v=zk3Y28-fGJc
+Background art - https://www.artstation.com/artwork/zDeDQw
