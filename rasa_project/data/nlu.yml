@@ -54,12 +54,12 @@ nlu:
   examples: |
     - crazy
     - that's crazy
-    - she seems crazy
+    - he seems crazy
 - intent: awesome
   examples: |
     - that's brilliant
     - awesome
-    - she seems awesome
+    - he seems awesome
     - fantastic
 - intent: who_is_turner
   examples: |

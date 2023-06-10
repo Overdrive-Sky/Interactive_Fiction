@@ -80,11 +80,11 @@ responses:
   utter_cosmos_purpose:
   - text: Cosmos runs a simutated world where every human being can be happy. If Cosmos stoped functioning, everybody would vanish!
   utter_who_is_turner:
-  - text: Turner is my creator. She's the most brilliant scientist ever. She created me, Cosmos and made sure everybody is happy forever! She's awesome!
+  - text: Turner is my creator. He's the most brilliant scientist ever. He created me, Cosmos and made sure everybody is happy forever! He's awesome!
   utter_turner_is_good:
-  - text: No, she's good. She is the best. I know it!
+  - text: No, he's good. He is the best. I know it!
   utter_turner_is_awesome:
-  - text: I know right. She is indeed fantastic
+  - text: I know right. He is indeed fantastic
   utter_what_is_happy:
   - text: Timmy doesn't know what happiness is. Only knows that humans are happy. What is happiness? Can you give me an example?
   utter_happy_examples:
