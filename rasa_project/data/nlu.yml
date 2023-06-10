@@ -1,0 +1,197 @@
+version: "3.1"
+nlu:
+- intent: tell_me_a_story
+  examples: |
+    - tell me a story
+    - can you tell me a joke?
+    - how about a story
+- intent: scared
+  examples: |
+    - wow, you scared me
+    - that frighnted me a little
+    - you startled me
+    - that's scary
+- intent: surprised
+  examples: |
+    - wow, you surprised me
+    - that surprised me
+    - wow
+    - I'm surprised
+- intent: tell_me_a_joke
+  examples: |
+    - Tell me a joke
+    - Can you tell me a joke
+    - How about a joke?
+- intent: do_you_eat
+  examples: |
+    - What do you eat?
+    - Do you eat?
+    - Do you consume food?
+- intent: food
+  examples: |
+    - [banana](favorite_food)
+    - [milk](favorite_food)
+    - [cereals](favorite_food)
+    - [almonds](favorite_food)
+    - [spaghetti](favorite_food)
+    - [lasagna](favorite_food)
+    - [beef](favorite_food)
+    - [bitoque](favorite_food)
+    - [francesinha](favorite_food)
+- intent: happy_examples
+  examples: |
+    - Playing games
+    - Dancing
+    - Singing
+    - Eating good food
+    - Drinking
+    - Playing with toys
+- intent: are_you_happy
+  examples: |
+    - Are you happy?
+    - You happy?
+- intent: crazy
+  examples: |
+    - crazy
+    - that's crazy
+    - he seems crazy
+- intent: awesome
+  examples: |
+    - that's brilliant
+    - awesome
+    - he seems awesome
+    - fantastic
+- intent: who_is_turner
+  examples: |
+    - Who is Turner?
+    - Turner?
+    - Turner? Who is that?
+- intent: cosmos_purpose
+  examples: |
+    - What does it do?
+    - What is its purpose?
+    - What does Cosmos do?
+- intent: what_is_cosmos
+  examples: |
+    - Who is Cosmos?
+    - What is Cosmos?
+    - What do you mean Cosmos?
+    - Cosmos?
+- intent: example
+  examples: |
+    - Can you give me an example?
+    - What do you mean?
+    - Can you be more specific?
+    - How so?
+    - How come?
+- intent: what_do_you_do
+  examples: |
+    - What do you do?
+    - What is your job?
+    - Your function?
+- intent: job_specifics
+  examples: |
+    - Program code
+    - Make software
+    - Repair computers
+    - Fix heating
+    - Make sure everything is working
+- intent: job
+  examples: |
+    - My job is being a [plumber](job)
+    - My job is [accountant](job)
+    - I am a [programmer](job)
+    - I am a [maintenance](job) guy
+- intent: present
+  examples: |
+    - I am [Nuno](name)
+    - My name is [João](name)
+    - People call me [Adriano](name)
+    - [José](name)
+- intent: who_are_you
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - who are you?
+- intent: no_input
+  examples: |
+    - ''
+    - 
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
