@@ -26,3 +26,8 @@
 [0606/152521:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
 [0606/152641:ERROR:renderer_main.cc(207)] Running without renderer sandbox
 [0606/152658:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
+[0609/210704:ERROR:renderer_main.cc(207)] Running without renderer sandbox
+[0609/212936:WARNING:dns_config_service_win.cc(654)] Failed to read DnsConfig.
+[0609/213647:WARNING:dns_config_service_win.cc(654)] Failed to read DnsConfig.
+[0609/223102:WARNING:dns_config_service_win.cc(654)] Failed to read DnsConfig.
+[0609/231847:WARNING:message_in_transit_queue.cc(18)] Destroying nonempty message queue
