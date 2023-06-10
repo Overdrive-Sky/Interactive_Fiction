@@ -61,22 +61,22 @@ nlu:
     - awesome
     - she seems awesome
     - fantastic
-- intent: who_is_wanda
+- intent: who_is_turner
   examples: |
-    - Who is Wanda?
-    - Wanda?
-    - Wanda? Who is that?
-- intent: cosmo_purpose
+    - Who is Turner?
+    - Turner?
+    - Turner? Who is that?
+- intent: cosmos_purpose
   examples: |
     - What does it do?
     - What is its purpose?
-    - What does Cosmo do?
-- intent: what_is_cosmo
+    - What does Cosmos do?
+- intent: what_is_cosmos
   examples: |
-    - Who is Cosmo?
-    - What is Cosmo?
-    - What do you mean Cosmo?
-    - Cosmo?
+    - Who is Cosmos?
+    - What is Cosmos?
+    - What do you mean Cosmos?
+    - Cosmos?
 - intent: example
   examples: |
     - Can you give me an example?

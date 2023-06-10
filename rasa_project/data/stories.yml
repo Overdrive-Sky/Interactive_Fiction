@@ -22,37 +22,37 @@ stories:
   - intent: example
   - action: utter_example_job
 
-- story: what is cosmo, sad 
+- story: what is cosmos, sad 
   steps:
-  - intent: what_is_cosmo
-  - action: utter_what_is_cosmo
-  - intent: cosmo_purpose
-  - action: utter_cosmo_purpose
+  - intent: what_is_cosmos
+  - action: utter_what_is_cosmos
+  - intent: cosmos_purpose
+  - action: utter_cosmos_purpose
   - intent: mood_unhappy
   - action: utter_cheer_up
 
-- story: whats cosmo, happy ending
+- story: whats cosmos, happy ending
   steps:
-  - intent: what_is_cosmo
-  - action: utter_what_is_cosmo
-  - intent: cosmo_purpose
-  - action: utter_cosmo_purpose
+  - intent: what_is_cosmos
+  - action: utter_what_is_cosmos
+  - intent: cosmos_purpose
+  - action: utter_cosmos_purpose
   - intent: mood_great
   - action: utter_happy
 
-- story: who is wanda, sad ending
+- story: who is turner, sad ending
   steps:
-  - intent: who_is_wanda
-  - action: utter_who_is_wanda
+  - intent: who_is_turner
+  - action: utter_who_is_turner
   - intent: crazy
-  - action: utter_wanda_is_good
+  - action: utter_turner_is_good
 
-- story: who is wanda, happy ending
+- story: who is turner, happy ending
   steps:
-  - intent: who_is_wanda
-  - action: utter_who_is_wanda
+  - intent: who_is_turner
+  - action: utter_who_is_turner
   - intent: awesome
-  - action: utter_wanda_is_awesome
+  - action: utter_turner_is_awesome
 
 - story: are you happy? happy ending
   steps:

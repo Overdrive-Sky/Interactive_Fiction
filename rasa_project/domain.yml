@@ -3,7 +3,7 @@ intents:
 - affirm
 - are_you_happy
 - awesome
-- cosmo_purpose
+- cosmos_purpose
 - crazy
 - deny
 - do_you_eat
@@ -20,15 +20,15 @@ intents:
 - present
 - tell_me_a_joke
 - what_do_you_do
-- what_is_cosmo
+- what_is_cosmos
 - who_are_you
-- who_is_wanda
+- who_is_turner
 - scared
 - surprised
 - tell_me_a_story
 responses:
   utter_tell_story: 
-  - text: "Well, in the beggining there Timmy and mother Wanda. Mother made younger brother Cosmo and said 'Timmy, you need to take care of your brother now'. Timmy didn't want to take care of him. But after mother went missing, Timmy feels like that is what he has to do. So now I help everybody and take care of Cosmo"
+  - text: "Well, in the beggining there Timmy and father Turner. Father made younger brother Cosmos and said 'Timmy, you need to take care of your brother now'. Timmy didn't want to take care of him. But after father went missing, Timmy feels like that is what he has to do. So now I help everybody and take care of Cosmos"
   - text: "A story? Once upon a time there was a green creature living in a swamp. He lived peacefully until other creatures including a mule decided to invade his swamp. The green one then embarked on a quest to retake his swamp. Ended up marrying a noble woman. Crazy right?"
   - text: "Yeah I can tell a story. A rodent and feline spend their daily lives after each other. Eventually they understand that they have more in common that they thought. They reached an agreement and spent the rest of their days playing together. Isn't that great? I wish I could play all day long"
   utter_scared:
@@ -74,16 +74,16 @@ responses:
   utter_what_do_i_do:
   - text: I help everybody on their path to be happy!
   utter_example_job:
-  - text: Oh you know, to make sure Cosmo is always up and running!
-  utter_what_is_cosmo:
-  - text: Cosmo is the computer that Wanda made.
-  utter_cosmo_purpose:
-  - text: Cosmo runs a simutated world where every human being can be happy. If Cosmo stoped functioning, everybody would vanish!
-  utter_who_is_wanda:
-  - text: Wanda is my creator. She's the most brilliant scientist ever. She created me, Cosmo and made sure everybody is happy forever! She's awesome!
-  utter_wanda_is_good:
+  - text: Oh you know, to make sure Cosmos is always up and running!
+  utter_what_is_cosmos:
+  - text: Cosmos is the computer that Turner made.
+  utter_cosmos_purpose:
+  - text: Cosmos runs a simutated world where every human being can be happy. If Cosmos stoped functioning, everybody would vanish!
+  utter_who_is_turner:
+  - text: Turner is my creator. She's the most brilliant scientist ever. She created me, Cosmos and made sure everybody is happy forever! She's awesome!
+  utter_turner_is_good:
   - text: No, she's good. She is the best. I know it!
-  utter_wanda_is_awesome:
+  utter_turner_is_awesome:
   - text: I know right. She is indeed fantastic
   utter_what_is_happy:
   - text: Timmy doesn't know what happiness is. Only knows that humans are happy. What is happiness? Can you give me an example?
