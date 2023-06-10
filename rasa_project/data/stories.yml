@@ -170,7 +170,7 @@ stories:
   steps:
   - intent: nlu_fallback
   - action: utter_nothing
-
+ 
 # - story: interactive_story_1
 #   steps:
 #   - intent: deny

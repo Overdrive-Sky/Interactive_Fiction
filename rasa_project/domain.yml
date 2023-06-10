@@ -114,6 +114,18 @@ entities:
 - job
 - favorite_food
 slots:
+  previously_scared:
+    type: bool
+    influence_conversation: true
+    initial_value: false
+    mappings:
+    - type: custom
+  previously_surprised:
+    type: bool
+    influence_conversation: true
+    initial_value: false
+    mappings:
+    - type: custom
   name:
     type: text
     influence_conversation: true
@@ -140,18 +152,6 @@ slots:
   joke_setup:
     type: text
     influence_conversation: true
-    mappings:
-    - type: custom
-  previously_scared:
-    type: bool
-    influence_conversation: true
-    initial_value: false
-    mappings:
-    - type: custom
-  previously_surprised:
-    type: bool
-    influence_conversation: true
-    initial_value: false
     mappings:
     - type: custom
 actions:
